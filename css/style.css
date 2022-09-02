@@ -374,9 +374,9 @@ h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transition: min-height 0.3s ease 0s;
-  -o-transition: min-height 0.3s ease 0s;
-  transition: min-height 0.3s ease 0s;
+  -webkit-transition: min-height 0.4s ease 0s;
+  -o-transition: min-height 0.4s ease 0s;
+  transition: min-height 0.4s ease 0s;
 }
 
 .header__container:before {
@@ -613,6 +613,7 @@ h6 {
   height: 100%;
   overflow: hidden;
   position: relative;
+  z-index: 2;
 }
 
 .menu-top__border:not(:last-child) {
@@ -781,7 +782,6 @@ h6 {
           flex-direction: column;
   color: #FFFFFF;
   position: relative;
-  height: 100%;
 }
 
 .main-block__label {
@@ -793,10 +793,17 @@ h6 {
 
 .main-block__content {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .main-block__content-body {
-  height: 100%;
+  pointer-events: none;
 }
 
 .main-block__subtitle {
@@ -807,9 +814,6 @@ h6 {
 }
 
 .main-block__title {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
   position: relative;
   z-index: 5;
   margin-left: -6.3125rem;
@@ -835,6 +839,7 @@ h6 {
 }
 
 .main-block__content-image {
+  pointer-events: none;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -859,6 +864,10 @@ h6 {
   z-index: 1;
 }
 
+.slider-main__slider {
+  position: relative;
+}
+
 .slider-main__slide {
   position: relative;
   min-width: 100%;
@@ -871,7 +880,7 @@ h6 {
 .slider-main__image::after,
 .slider-main__image::before {
   position: absolute;
-  z-index: 10;
+  z-index: 8;
   content: "";
   left: 0;
   width: 100%;
@@ -1011,6 +1020,14 @@ svg circle {
   display: none !important;
 }
 
+@media (min-width: 47.99875em) {
+  .main-block__more {
+    -ms-flex-item-align: start;
+        -ms-grid-row-align: start;
+        align-self: start;
+  }
+}
+
 @media (min-width: 76.625em) {
   .title-menu {
     font-size: 2rem;
@@ -1030,10 +1047,6 @@ svg circle {
 
   .main-block__body {
     padding-top: 6.75rem;
-  }
-
-  .main-block__body {
-    padding-bottom: 9.5625rem;
   }
 
   .main-block__body {
@@ -1132,10 +1145,6 @@ svg circle {
 
   .main-block__body {
     padding-top: 6.1875rem;
-  }
-
-  .main-block__body {
-    padding-bottom: 3.375rem;
   }
 
   .main-block__body {
@@ -1432,14 +1441,10 @@ svg circle {
             transform: rotate(45deg);
   }
 
-  .main-block__content-body {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+  .main-block__content {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 
   .main-block__subtitle {
@@ -1453,6 +1458,12 @@ svg circle {
 
   .main-block__more {
     padding: 1.25rem 0.625rem;
+  }
+}
+
+@media (max-width: 47.99875em) and (max-width: 20em) {
+  .main-block__more {
+    margin-bottom: 3.75rem;
   }
 }
 
@@ -1518,18 +1529,6 @@ svg circle {
 @supports not (padding-top: clamp( 6.1875rem , 5.9888245033rem  +  0.9933774834vw , 6.75rem )) {
     .main-block__body {
       padding-top: calc(6.1875rem + 0.5625 * (100vw - 20rem) / 56.625);
-    }
-}
-
-@supports (padding-bottom: clamp( 3.375rem , 1.1895695364rem  +  10.9271523179vw , 9.5625rem )) {
-    .main-block__body {
-      padding-bottom: clamp( 3.375rem , 1.1895695364rem  +  10.9271523179vw , 9.5625rem );
-    }
-}
-
-@supports not (padding-bottom: clamp( 3.375rem , 1.1895695364rem  +  10.9271523179vw , 9.5625rem )) {
-    .main-block__body {
-      padding-bottom: calc(3.375rem + 6.1875 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -1638,6 +1637,26 @@ svg circle {
 @supports not (height: clamp( 38.4375rem , 33.9562637969rem  +  22.4061810155vw , 51.125rem )) {
     .slider-main__image {
       height: calc(38.4375rem + 12.6875 * (100vw - 20rem) / 56.625);
+    }
+}
+}
+
+@media (max-width: 47.99875em) and (min-width: 76.625em) {
+  .main-block__more {
+    margin-bottom: 6.25rem;
+  }
+}
+
+@media (max-width: 47.99875em) and (min-width: 20em) and (max-width: 76.625em) {
+@supports (margin-bottom: clamp( 3.75rem , 2.8669977925rem  +  4.4150110375vw , 6.25rem )) {
+    .main-block__more {
+      margin-bottom: clamp( 3.75rem , 2.8669977925rem  +  4.4150110375vw , 6.25rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 3.75rem , 2.8669977925rem  +  4.4150110375vw , 6.25rem )) {
+    .main-block__more {
+      margin-bottom: calc(3.75rem + 2.5 * (100vw - 20rem) / 56.625);
     }
 }
 }
