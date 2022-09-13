@@ -7814,7 +7814,7 @@
                 modules: [ Navigation, Keyboard, Mousewheel, Scrollbar ],
                 observer: true,
                 observeParents: true,
-                speed: 2e3,
+                speed: 1e3,
                 spaceBetween: 30,
                 simulateTouch: true,
                 mousewheel: {
