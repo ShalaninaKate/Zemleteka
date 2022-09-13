@@ -7830,10 +7830,6 @@
                         slidesPerView: 1.7,
                         spaceBetween: 30
                     },
-                    375: {
-                        slidesPerView: 1.7,
-                        spaceBetween: 30
-                    },
                     425: {
                         slidesPerView: 2.1,
                         spaceBetween: 30
@@ -7843,7 +7839,7 @@
                         spaceBetween: 60
                     },
                     1400: {
-                        slidesPerView: 3.2,
+                        slidesPerView: 3.1,
                         spaceBetween: 60,
                         slidesPerGroup: 2
                     }
