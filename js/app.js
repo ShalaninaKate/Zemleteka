@@ -7755,13 +7755,9 @@
                 slidesPerView: 1,
                 spaceBetween: 0,
                 autoHeight: true,
-                speed: 1800,
+                speed: 2500,
                 loop: true,
                 effect: "fade",
-                autoplay: {
-                    delay: 3e3,
-                    disableOnInteraction: false
-                },
                 pagination: {
                     el: ".slider-main__dotts",
                     clickable: true
@@ -7818,7 +7814,8 @@
                 modules: [ Navigation, Keyboard, Mousewheel, Scrollbar ],
                 observer: true,
                 observeParents: true,
-                speed: 1e3,
+                speed: 2e3,
+                spaceBetween: 30,
                 simulateTouch: true,
                 mousewheel: {
                     sensitivity: 1
@@ -7830,20 +7827,25 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: .55,
+                        slidesPerView: 1.7,
+                        spaceBetween: 30
+                    },
+                    375: {
+                        slidesPerView: 1.7,
                         spaceBetween: 30
                     },
                     425: {
-                        slidesPerView: .7,
+                        slidesPerView: 2.1,
                         spaceBetween: 30
                     },
                     768: {
-                        slidesPerView: 1.1,
-                        spaceBetween: 30
+                        slidesPerView: 2.5,
+                        spaceBetween: 60
                     },
                     1400: {
-                        slidesPerView: 1.1,
-                        spaceBetween: 50
+                        slidesPerView: 3.2,
+                        spaceBetween: 60,
+                        slidesPerGroup: 2
                     }
                 },
                 on: {}
