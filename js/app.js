@@ -7784,15 +7784,15 @@
                     320: {
                         slidesPerGroup: 1,
                         slidesPerView: 1.3,
-                        spaceBetween: 9
+                        spaceBetween: 10
                     },
                     480: {
                         slidesPerView: 1.7,
-                        spaceBetween: 9
+                        spaceBetween: 10
                     },
                     600: {
                         slidesPerView: 2.1,
-                        spaceBetween: 9
+                        spaceBetween: 10
                     },
                     768: {
                         slidesPerView: 2.6,
