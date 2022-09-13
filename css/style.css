@@ -1441,6 +1441,7 @@ h6 {
 }
 
 .statistics__item {
+  cursor: pointer;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
