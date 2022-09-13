@@ -7777,12 +7777,8 @@
                 observer: true,
                 observeParents: true,
                 speed: 800,
-                slidesPerGroup: 2,
                 spaceBetween: 16,
                 simulateTouch: true,
-                mousewheel: {
-                    sensitivity: 1
-                },
                 effect: "fade",
                 navigation: {
                     prevEl: ".slider-arrow_prev",
@@ -7790,6 +7786,7 @@
                 },
                 breakpoints: {
                     320: {
+                        slidesPerGroup: 1,
                         slidesPerView: 1.3,
                         spaceBetween: 9
                     },
@@ -7810,6 +7807,7 @@
                         spaceBetween: 16
                     },
                     1400: {
+                        slidesPerGroup: 2,
                         slidesPerView: 3.45,
                         spaceBetween: 16
                     }

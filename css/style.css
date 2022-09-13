@@ -1457,6 +1457,11 @@ h6 {
   transition: all 0.5s ease 0s;
 }
 
+.statistics__item:hover {
+  background-color: #F13634;
+  border-color: #F13634;
+}
+
 .item-statistics {
   color: #ffffff;
 }
@@ -5023,11 +5028,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
             transform: scale(1.1);
-  }
-
-  .statistics__item:hover {
-    background-color: #F13634;
-    border-color: #F13634;
   }
 
   .free-plot__slide:hover {
