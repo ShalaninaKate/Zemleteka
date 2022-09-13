@@ -3668,14 +3668,17 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .header._header-scroll .header__phone {
-    background-color: #7CDA7C;
-    padding: 0.4375rem;
-    border-radius: 50%;
     color: #fff;
   }
 
   .header._header-scroll .header__phone::before {
     font-size: 0.875rem;
+  }
+
+  .header._header-scroll .header__phone_top::before {
+    background-color: #7CDA7C;
+    padding: 0.4375rem;
+    border-radius: 50%;
   }
 
   .header._header-scroll .header__label-scroll {
