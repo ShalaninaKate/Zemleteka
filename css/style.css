@@ -262,6 +262,196 @@ h6 {
   padding: 0 0.9375rem;
 }
 
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease 0s;
+  -o-transition: opacity 0.5s ease 0s;
+  transition: opacity 0.5s ease 0s;
+  pointer-events: none;
+  z-index: 149;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  body::after {
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+  }
+}
+
+.popup-show body::after {
+  opacity: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 10px;
+  -webkit-transition: visibility 0.5s ease 0s;
+  -o-transition: visibility 0.5s ease 0s;
+  transition: visibility 0.5s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.popup_show {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.popup_show .popup__content {
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__content {
+  visibility: hidden;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  background-color: #eee;
+  padding: 20px;
+  width: 100%;
+  border-radius: 1.25rem;
+}
+
+.lock .popup__content {
+  visibility: visible;
+}
+
+.gallery-township__content {
+  background-color: transparent;
+  width: 60%;
+}
+
+.gallery-township__close {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  top: -0.875rem;
+  right: -1.1875rem;
+  cursor: pointer;
+  z-index: 30;
+  background: url("../img/icons/close-popap.svg") 50%/0.875rem 0.875rem no-repeat;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  border-radius: 50%;
+}
+
+.gallery-township__text {
+  position: relative;
+}
+
+.gallery-township__image-ibg {
+  padding-bottom: 65%;
+}
+
+.gallery-township__arrows {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0px, -100%);
+      -ms-transform: translate(0px, -100%);
+          transform: translate(0px, -100%);
+  width: 120%;
+  left: -10%;
+  z-index: 5;
+}
+
+.gallery-township__arrows.slider-arrows {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.gallery-township__arrows .slider-arrow {
+  pointer-events: auto;
+  border-radius: 50%;
+  height: 3.25rem;
+  background-color: #7CDA7C;
+  color: #FFFFFF;
+  font-size: 1rem;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.gallery-township__arrows .slider-arrow_prev::before {
+  -webkit-transform: rotate(-180deg);
+      -ms-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+
+.gallery-township__arrows .swiper-button-disabled {
+  background-color: #E3E5EF;
+  color: #222222;
+}
+
+.gallery-township__pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 4px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #FFFFFF;
+  font-size: 1.0625rem;
+}
+
+.gallery-township__link-back {
+  display: none;
+}
+
+.gallery-township__share {
+  display: none;
+}
+
 [class*=-ibg] {
   position: relative;
 }
@@ -309,8 +499,12 @@ h6 {
 
 .title-menu {
   font-weight: 600;
-  font-size: 2rem;
   color: #ffffff;
+}
+
+.title-township {
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .button {
@@ -965,10 +1159,10 @@ h6 {
   top: -100%;
   left: 0;
   width: 100%;
-  z-index: 50;
-  -webkit-transition: top 0.4s ease 0s;
-  -o-transition: top 0.4s ease 0s;
-  transition: top 0.4s ease 0s;
+  z-index: 55;
+  -webkit-transition: top 0.5s ease 0s;
+  -o-transition: top 0.5s ease 0s;
+  transition: top 0.5s ease 0s;
   background: #FFFFFF;
   -webkit-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
           box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
@@ -977,6 +1171,8 @@ h6 {
 .header-inner-scroll__container {
   display: -ms-grid;
   display: grid;
+  position: relative;
+  top: 0;
   -ms-grid-columns: 1fr auto;
   grid-template-columns: 1fr auto;
   -webkit-column-gap: 1.25rem;
@@ -986,6 +1182,22 @@ h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-transition: top 0.3s ease 0s;
+  -o-transition: top 0.3s ease 0s;
+  transition: top 0.3s ease 0s;
+}
+
+.header-inner-scroll__container._navigator-active {
+  position: fixed;
+  top: -100%;
+  max-width: 74.75rem;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  -webkit-transition: top 0.5s ease 0s;
+  -o-transition: top 0.5s ease 0s;
+  transition: top 0.5s ease 0s;
+  z-index: 55;
 }
 
 .header-inner-scroll__info {
@@ -2504,10 +2716,6 @@ h6 {
   line-height: 1.4285714286;
 }
 
-.main-township {
-  padding-bottom: 5.3125rem;
-}
-
 .main-township__top {
   margin-bottom: 1.875rem;
 }
@@ -2536,6 +2744,7 @@ h6 {
 }
 
 .main-township__text {
+  display: block;
   line-height: 1.1875;
   text-decoration: underline !important;
 }
@@ -2571,12 +2780,8 @@ h6 {
   width: 100%;
 }
 
-.gallery-township {
-  margin-bottom: 2.875rem;
-}
-
 .gallery-township__items {
-  border-radius: 15px;
+  border-radius: 0.875rem;
   overflow: hidden;
   display: -ms-grid;
   display: grid;
@@ -2612,6 +2817,7 @@ h6 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  border-radius: 0rem 0.75rem 0.75rem 0;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -2644,46 +2850,46 @@ h6 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: 0.6875rem;
+  margin-bottom: 2.0625rem;
 }
 
 .about-township__title {
   font-weight: 600;
-  font-size: 2rem;
   line-height: 1.21875;
+  margin-bottom: 0.9375rem;
 }
 
 .about-township__price {
   font-weight: 600;
-  font-size: 1.375rem;
   line-height: 1.2272727273;
 }
 
 .about-township__links {
-  margin-bottom: 2.0625rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.3125rem;
 }
 
 .about-township__link {
   line-height: 1.1875;
-  position: relative;
   text-decoration: underline !important;
 }
 
 .about-township__text {
-  font-size: 1.0625rem;
   line-height: 165%;
   text-align: justify;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .about-township__text p:not(:last-child) {
-  margin-bottom: 11px;
+  margin-bottom: 10px;
 }
 
 .about-township__more {
@@ -2706,28 +2912,504 @@ h6 {
   font-size: 0.75rem;
 }
 
+.filtrs-township__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.filtrs-township__promt {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #7F849C;
+}
+
+.filtrs-township__image-ibg {
+  padding-bottom: 36.2876254181%;
+}
+
+.filtrs-township__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.625rem;
+  gap: 1.875rem;
+}
+
+.filtrs-township__header-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 600;
+}
+
+.filtrs-township__header-items {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (4.375rem)[3];
+  grid-template-columns: repeat(3, 4.375rem);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1.3125rem;
+  cursor: pointer;
+}
+
+.filtrs-township__header-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.625rem;
+  min-height: 1.25rem;
+}
+
+.filtrs-township__header-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 0.9375rem;
+          flex: 0 0 0.9375rem;
+  height: 0.75rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.filtrs-township__header-icon span,
+.filtrs-township__header-icon::before,
+.filtrs-township__header-icon::after {
+  content: "";
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  left: 0;
+  position: absolute;
+  width: 66.666%;
+  height: 0.125rem;
+  background-color: #C6C9D7;
+  pointer-events: none;
+}
+
+.filtrs-township__header-icon::before {
+  top: 0;
+  width: 33.333%;
+}
+
+.filtrs-township__header-icon::after {
+  bottom: 0;
+  width: 100%;
+}
+
+.filtrs-township__header-icon span {
+  top: calc(50% - 0.0625rem);
+}
+
+.filtr-active .filtrs-township__header-icon span,
+.filtr-active .filtrs-township__header-icon::before,
+.filtr-active .filtrs-township__header-icon::after {
+  background-color: #222222;
+}
+
+.filtrs-township__header-icon.filtr-max::before {
+  width: 100%;
+}
+
+.filtrs-township__header-icon.filtr-max::after {
+  width: 33.333%;
+}
+
+.filtrs-township__header-text {
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #787C92;
+}
+
+.filtr-active .filtrs-township__header-text {
+  color: #222222;
+  font-weight: 600;
+}
+
+.filtrs-township__table {
+  margin-bottom: 1.5rem;
+}
+
+.item-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.item-filter__input {
+  display: none;
+}
+
+.item-filter__input:checked + .item-filter__label {
+  font-weight: 600;
+}
+
+.item-filter__input:checked + .item-filter__label span,
+.item-filter__input:checked + .item-filter__label::before,
+.item-filter__input:checked + .item-filter__label::after {
+  background-color: #222222;
+}
+
+.item-filter__input:checked + .item-filter__label.filter-active::before {
+  width: 0.9375rem;
+}
+
+.item-filter__input:checked + .item-filter__label.filter-active::after {
+  width: 0.3125rem;
+}
+
+.item-filter__label {
+  padding-left: 1.4375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.875rem;
+  position: relative;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 0.9375rem;
+          flex: 0 0 0.9375rem;
+  height: 0.75rem;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.item-filter__label span,
+.item-filter__label::before,
+.item-filter__label::after {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  content: "";
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  left: 0;
+  position: absolute;
+  width: 10px;
+  height: 0.125rem;
+  background-color: #C6C9D7;
+  pointer-events: none;
+}
+
+.item-filter__label::before {
+  top: 0;
+  width: 5px;
+}
+
+.item-filter__label::after {
+  bottom: 0;
+  width: 15px;
+}
+
+.item-filter__label span {
+  top: calc(50% - 0.0625rem);
+}
+
+.table-township {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.table-township__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-left: 2px solid #222222;
+  border-top: 2px solid #222222;
+  border-bottom: 2px solid #222222;
+  border-right: 1px solid #222222;
+  border-radius: 0.5rem 0 0 0.5rem;
+  position: relative;
+  z-index: 5;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 9.0625rem;
+          flex: 0 0 9.0625rem;
+  -webkit-transform: translate(1px, 0px);
+      -ms-transform: translate(1px, 0px);
+          transform: translate(1px, 0px);
+}
+
+.table-township__righ-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
+.table-township__righ-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  height: 3.0625rem;
+  padding-left: 0.5625rem;
+}
+
+.table-township__righ-item:not(:last-child) {
+  border-bottom: 1px solid #D7E2F1;
+}
+
+.table-township__slider {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.table-township__scrollbar {
+  cursor: pointer;
+  height: 2px;
+  background-color: #D8DAE4;
+}
+
+.table-township__scrollbar .swiper-scrollbar-drag {
+  height: 2px;
+  background-color: #1E321E;
+}
+
+.table__slider.swiper {
+  overflow: visible;
+}
+
+.table__slider {
+  position: relative;
+}
+
+.table__slider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100vw;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 2;
+  -webkit-transform: translate(-100%, 0px);
+      -ms-transform: translate(-100%, 0px);
+          transform: translate(-100%, 0px);
+}
+
+.table__slide {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 5.0625rem;
+          flex: 0 0 5.0625rem;
+  cursor: pointer;
+  border-top: 2px solid #222222;
+  border-bottom: 2px solid #222222;
+  border-right: 1px solid #222222;
+}
+
+.table__slide:first-of-type {
+  border-left: 1px solid #222222;
+}
+
+.table__slide:last-of-type {
+  border-right: 2px solid #222222;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.table__slide.active {
+  background-color: #B5F9B5;
+}
+
+.table__slide-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
+.table__slide-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2px;
+  text-align: center;
+  height: 3.0625rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.table__slide-item:not(:last-child) {
+  border-bottom: 1px solid #D7E2F1;
+}
+
+.table__slide-item.active {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
 .info-township__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.info-township__included {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+.info-township__left {
+  width: 67%;
 }
 
-.info-township__form {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 24rem;
-          flex: 0 0 24rem;
+.info-township__location-map {
+  max-width: 47.4375rem;
+  height: 20.75rem;
+  margin-bottom: 0.9375rem;
 }
 
-.included-township__body {
+.info-township__location-map img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.info-township__location-button {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2142857143;
+  border-radius: 0.5rem;
+  padding: 1.3125rem 0.75rem;
+  min-width: 10.625rem;
+}
+
+.info-township__important-body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  max-width: 47.4375rem;
+  position: relative;
+}
+
+.info-township__important-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.6875rem;
+  -webkit-column-gap: 13.125rem;
+     -moz-column-gap: 13.125rem;
+          column-gap: 13.125rem;
+}
+
+.info-township__important-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5625rem;
+  line-height: 1.2;
+}
+
+.info-township__important-item::before {
+  font-size: 1.375rem;
+}
+
+.info-township__panorama-map {
+  max-width: 47.4375rem;
+  height: 20.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.info-township__panorama-map img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.info-township__right {
+  width: 34%;
+  position: relative;
+}
+
+.info-township__good-price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5625rem;
+  background: #F2FDF2;
+  border-radius: 0.5rem;
+  padding: 0.8125rem 1rem 1.25rem;
+}
+
+.info-township__good-price-icon::before {
+  color: #2E802E;
+  font-size: 1.3125rem;
+}
+
+.info-township__good-price-info {
+  padding-top: 0.25rem;
+}
+
+.info-township__good-price-label {
+  font-weight: 600;
+  line-height: 1.2;
+  color: #2E802E;
+  margin-bottom: 0.5625rem;
+}
+
+.info-township__good-price-text {
+  font-size: 0.875rem;
+  color: #787C92;
+}
+
+.included-township__title {
+  font-weight: 600;
+  margin-bottom: 2.3125rem;
+}
+
+.included-township__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+  grid-template-columns: repeat(2, 1fr);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .included-township__item {
@@ -2737,7 +3419,15 @@ h6 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   gap: 0.75rem;
+}
+
+.included-township__item::before {
+  font-size: 1.3125rem;
+  justify-self: flex-start;
 }
 
 .form-township {
@@ -2748,9 +3438,10 @@ h6 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 2px solid #222222;
+  background-color: #FFFFFF;
   border-radius: 0.75rem;
-  padding: 0.6875rem 0.9375rem 1.5625rem;
+  padding: 0.6875rem 0.9375rem 1.4375rem;
+  margin-bottom: 0.5625rem;
 }
 
 .form-township__text {
@@ -2759,18 +3450,133 @@ h6 {
 }
 
 .form-township__text:not(:last-child) {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .form-township__input {
-  border: 1px solid #7F849C;
+  outline: 1px solid #7F849C;
   border-radius: 8px;
+  padding: 1.25rem 1rem;
+}
+
+.form-township__input:not(:last-child) {
+  margin-bottom: 0.5625rem;
+}
+
+.form-township__input:focus {
+  outline: 1px solid #222222;
 }
 
 .form-township__button {
-  border-radius: 8px;
-  padding: 1.375rem 0.875rem;
-  min-height: 3.875rem;
+  border-radius: 0.5rem;
+  padding: 1.25rem 1rem;
+  max-height: 3.875rem;
+}
+
+.form-township__button:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.form-township__checkbox {
+  margin-bottom: 1.4375rem;
+}
+
+.form-township__checkbox-input {
+  display: none;
+}
+
+.form-township__checkbox-input:checked + .form-township__checkbox-label::after {
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.form-township__checkbox-input:checked + .form-township__checkbox-label::before {
+  border: 1px solid #222222;
+}
+
+.form-township__checkbox-label {
+  font-size: 0.6875rem;
+  line-height: 1.1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.form-township__checkbox-label::before {
+  content: "";
+  margin-right: 0.5625rem;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 1.25rem;
+          flex: 0 0 1.25rem;
+  height: 1.25rem;
+  border: 1px solid #B5B5B5;
+  border-radius: 0.25rem;
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.form-township__checkbox-label::after {
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  -o-transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  content: "";
+  background: url("../img/icons/check.svg") no-repeat;
+  position: absolute;
+  left: 0.25rem;
+  width: 0.75rem;
+  height: 0.5625rem;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+}
+
+.form-township__checkbox-label a {
+  text-decoration: underline;
+}
+
+.form-township__name {
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.1111111111;
+  margin-bottom: 0.3125rem;
+}
+
+.form-township__location {
+  font-size: 0.875rem;
+  line-height: 1.4285714286;
+  color: #787C92;
+  margin-bottom: 1rem;
+}
+
+.form-township__price {
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.township__news {
+  background: #F5F5F5;
+}
+
+.free-plot__decor_township {
+  border-bottom: none;
+}
+
+.free-plot__decor-item_township img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: bottom;
+     object-position: bottom;
 }
 
 .bottom-township {
@@ -2820,6 +3626,59 @@ h6 {
   border-radius: 8px;
   padding: 1rem;
   min-width: 10.0625rem;
+}
+
+.township__bottom-form {
+  background-color: #fff;
+  border-radius: 0.9375rem 0.9375rem 0 0;
+}
+
+.form-button {
+  display: none;
+}
+
+.form-button__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  padding-bottom: 1.1875rem;
+  padding-top: 1.1875rem;
+  border-bottom: 0.5px solid #D6D6D6;
+}
+
+.form-button__title {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.form-button__close {
+  position: absolute;
+  right: 0.9375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 0.625rem;
+          flex: 0 0 0.625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  padding: 0.9375rem;
+  border: 0.5px solid #8F8F8F;
+  border-radius: 50%;
+  z-index: 2;
 }
 
 .swiper {
@@ -3805,14 +4664,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 @media (min-width: 47.99875em) {
-  .header-inner._header-scroll .header-inner-scroll {
-    top: 0;
-  }
-
-  .header-inner._header-scroll .header-inner {
-    display: none;
-  }
-
   .main-block__more {
     -ms-flex-item-align: start;
         -ms-grid-row-align: start;
@@ -3823,23 +4674,33 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     border-bottom: 1px solid #222222;
     padding-bottom: 4.6875rem;
   }
-}
 
-@media (min-width: 61.99875em) and (min-width: 76.625em) {
-  .footer__menu {
-    padding-left: 9.125rem;
-  }
+  .no-webp .info-township__important-body::before{
+    background: url("../img/township/parus/decor_1.png"); }
 
-  .advantage__text {
-    font-size: 1.125rem;
-  }
-
-  .advantage__text {
-    top: 10.75rem;
+  .info-township__important-body::before {
+    content: "";
+    position: absolute;
+    top: -1.25rem;
+    right: 0;
+    width: 3.5625rem;
+    height: 4.5rem;
   }
 }
 
 @media (min-width: 61.99875em) {
+  .gallery-township__pagination {
+    margin-top: 1.625rem;
+  }
+
+  .header-inner._header-scroll .header-inner-scroll {
+    top: 0;
+  }
+
+  .header-inner._header-scroll .header-inner {
+    display: none;
+  }
+
   .footer__contacts {
     -webkit-box-align: end;
         -ms-flex-align: end;
@@ -3869,6 +4730,30 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     line-height: 1.3333333333;
     width: 70%;
   }
+
+  .form-township {
+    border: 2px solid #222222;
+  }
+
+  .free-plot__decor_township .free-plot__decor-item_1 {
+    -webkit-transform: translate(0px, -39px);
+        -ms-transform: translate(0px, -39px);
+            transform: translate(0px, -39px);
+  }
+}
+
+@media (min-width: 61.99875em) and (min-width: 76.625em) {
+  .footer__menu {
+    padding-left: 9.125rem;
+  }
+
+  .advantage__text {
+    font-size: 1.125rem;
+  }
+
+  .advantage__text {
+    top: 10.75rem;
+  }
 }
 
 @media (min-width: 76.625em) {
@@ -3878,6 +4763,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .title-menu {
     font-size: 2rem;
+  }
+
+  .title-township {
+    font-size: 1.625rem;
   }
 
   .header-main__left {
@@ -4143,6 +5032,122 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .advertising__button {
     font-size: 1rem;
   }
+
+  .main-township {
+    padding-bottom: 4.25rem;
+  }
+
+  .main-township__text {
+    font-size: 1rem;
+  }
+
+  .gallery-township {
+    margin-bottom: 2.875rem;
+  }
+
+  .about-township__title {
+    font-size: 2rem;
+  }
+
+  .about-township__price {
+    font-size: 1.375rem;
+  }
+
+  .about-township__link {
+    font-size: 1rem;
+  }
+
+  .about-township__text {
+    font-size: 1.0625rem;
+  }
+
+  .filtrs-township {
+    margin-bottom: 4.5625rem;
+  }
+
+  .filtrs-township__top {
+    margin-bottom: 1.6875rem;
+  }
+
+  .filtrs-township__image-ibg {
+    margin-bottom: 2.0625rem;
+  }
+
+  .info-township {
+    margin-bottom: 4.375rem;
+  }
+
+  .info-township__container {
+    gap: 3.3125rem;
+  }
+
+  .info-township__included {
+    margin-bottom: 5.3125rem;
+  }
+
+  .info-township__location {
+    margin-bottom: 5.5rem;
+  }
+
+  .info-township__location-title {
+    margin-bottom: 1.6875rem;
+  }
+
+  .info-township__important {
+    margin-bottom: 5.625rem;
+  }
+
+  .info-township__important-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .info-township__important-body {
+    gap: 17.5rem;
+  }
+
+  .info-township__important-item {
+    font-size: 1rem;
+  }
+
+  .info-township__panorama-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .included-township__list {
+    row-gap: 2.5rem;
+  }
+
+  .included-township__list {
+    font-size: 1rem;
+  }
+
+  .included-township__item::before {
+    font-size: 1.3125rem;
+  }
+
+  .township__news {
+    padding-top: 2.5625rem;
+  }
+
+  .township__free-plot {
+    padding-top: 3rem;
+  }
+
+  .township__free-plot {
+    padding-bottom: 1.375rem;
+  }
+
+  .free-plot__decor_township {
+    gap: 54.0625rem;
+  }
+
+  .free-plot__decor_township .free-plot__decor-item_1 {
+    width: 6.3125rem;
+  }
+
+  .free-plot__decor_township .free-plot__decor-item_2 {
+    width: 3.3125rem;
+  }
 }
 
 @media (min-width: 87.5em) {
@@ -4175,6 +5180,12 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 }
 
+@media (max-width: 90em) {
+  .gallery-township__content {
+    width: 70%;
+  }
+}
+
 @media (max-width: 75em) {
   .tabs-advantage__navigation {
     padding: 0 1.8125rem;
@@ -4197,6 +5208,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .title-menu {
+    font-size: 1.25rem;
+  }
+
+  .title-township {
     font-size: 1.25rem;
   }
 
@@ -4463,6 +5478,122 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .advertising__button {
     font-size: 0.9375rem;
   }
+
+  .main-township {
+    padding-bottom: 3.6875rem;
+  }
+
+  .main-township__text {
+    font-size: 0.8125rem;
+  }
+
+  .gallery-township {
+    margin-bottom: 1.6875rem;
+  }
+
+  .about-township__title {
+    font-size: 1.75rem;
+  }
+
+  .about-township__price {
+    font-size: 1.125rem;
+  }
+
+  .about-township__link {
+    font-size: 0.8125rem;
+  }
+
+  .about-township__text {
+    font-size: 0.8125rem;
+  }
+
+  .filtrs-township {
+    margin-bottom: 3.875rem;
+  }
+
+  .filtrs-township__top {
+    margin-bottom: 1rem;
+  }
+
+  .filtrs-township__image-ibg {
+    margin-bottom: 1.5625rem;
+  }
+
+  .info-township {
+    margin-bottom: 2.8125rem;
+  }
+
+  .info-township__container {
+    gap: 0.0000000625rem;
+  }
+
+  .info-township__included {
+    margin-bottom: 4rem;
+  }
+
+  .info-township__location {
+    margin-bottom: 3.8125rem;
+  }
+
+  .info-township__location-title {
+    margin-bottom: 1rem;
+  }
+
+  .info-township__important {
+    margin-bottom: 4.375rem;
+  }
+
+  .info-township__important-title {
+    margin-bottom: 1rem;
+  }
+
+  .info-township__important-body {
+    gap: 4.6875rem;
+  }
+
+  .info-township__important-item {
+    font-size: 0.8125rem;
+  }
+
+  .info-township__panorama-title {
+    margin-bottom: 1rem;
+  }
+
+  .included-township__list {
+    row-gap: 1.3125rem;
+  }
+
+  .included-township__list {
+    font-size: 0.8125rem;
+  }
+
+  .included-township__item::before {
+    font-size: 1.125rem;
+  }
+
+  .township__news {
+    padding-top: 2rem;
+  }
+
+  .township__free-plot {
+    padding-top: 2.625rem;
+  }
+
+  .township__free-plot {
+    padding-bottom: 1.25rem;
+  }
+
+  .free-plot__decor_township {
+    gap: 0.0000000625rem;
+  }
+
+  .free-plot__decor_township .free-plot__decor-item_1 {
+    width: 3.75rem;
+  }
+
+  .free-plot__decor_township .free-plot__decor-item_2 {
+    width: 2.375rem;
+  }
 }
 
 @media (max-width: 87.5em) {
@@ -4481,6 +5612,104 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 @media (max-width: 61.99875em) {
+  .gallery-township__body {
+    padding-bottom: 2rem;
+    margin: 0 -0.9375rem;
+  }
+
+  .gallery-township__slider {
+    position: relative;
+  }
+
+  .gallery-township__image-ibg {
+    padding-bottom: 67%;
+  }
+
+  .gallery-township__arrows {
+    display: none;
+  }
+
+  .gallery-township__arrows.slider-arrows {
+    display: none;
+  }
+
+  .gallery-township__pagination {
+    position: absolute;
+    bottom: 1rem;
+    right: 0.75rem;
+    padding: 0.3125rem 0.8125rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 11px;
+    font-size: 0.6875rem;
+  }
+
+  .gallery-township__link-back {
+    display: block;
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.2);
+            box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-township__link-back::before {
+    -webkit-transform: rotate(90deg) translateY(0.0625rem);
+        -ms-transform: rotate(90deg) translateY(0.0625rem);
+            transform: rotate(90deg) translateY(0.0625rem);
+    font-size: 0.75rem;
+  }
+
+  .gallery-township__share {
+    display: block;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.2);
+            box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-township__share::before {
+    -webkit-transform: translateX(0.0625rem);
+        -ms-transform: translateX(0.0625rem);
+            transform: translateX(0.0625rem);
+    font-size: 1rem;
+  }
+
+  .page_inner {
+    margin-top: 5.375rem;
+    padding-top: 0;
+  }
+
+  .page__header {
+    display: none;
+  }
+
   .header-main__container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -4501,6 +5730,45 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .header-main__phone span {
     display: none;
+  }
+
+  .header-inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+  }
+
+  .header-inner._header-scroll {
+    background: rgb(255, 255, 255);
+    -webkit-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
+            box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
+  }
+
+  .header-inner._header-scroll .header-inner__container {
+    min-height: 3.75rem;
+    color: #222222;
+  }
+
+  .header-inner._header-scroll .header-inner__container:before {
+    display: none;
+  }
+
+  .header-inner._header-scroll .header-inner__logo {
+    background: url("../img/logo-color.svg") center/cover no-repeat;
+    width: 6.25rem;
+    height: 1.8125rem;
+  }
+
+  .header-inner._header-scroll .header-inner__burger span,
+  .header-inner._header-scroll .header-inner__burger::before {
+    background-color: #000;
+  }
+
+  .menu-open .header-inner._header-scroll .icon-menu::before,
+  .menu-open .header-inner._header-scroll .icon-menu::after {
+    background-color: #fff;
   }
 
   .header-inner__container {
@@ -4675,6 +5943,219 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     color: #787C92;
     line-height: 1.3;
   }
+
+  .main-township__top {
+    display: none;
+  }
+
+  .gallery-township {
+    display: none;
+  }
+
+  .about-township__top {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    border-bottom: 1px solid #D6D6D6;
+    padding-bottom: 1.5rem;
+  }
+
+  .about-township__title {
+    margin-bottom: 1.1875rem;
+  }
+
+  .about-township__links {
+    margin-bottom: 1.125rem;
+  }
+
+  .table-township__right {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 7.9375rem;
+            flex: 0 0 7.9375rem;
+  }
+
+  .info-township__left {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+
+  .info-township__location-map {
+    width: 100%;
+    height: 16.125rem;
+  }
+
+  .info-township__important-list {
+    row-gap: 1.25rem;
+    -webkit-column-gap: 0rem;
+       -moz-column-gap: 0rem;
+            column-gap: 0rem;
+  }
+
+  .info-township__panorama-map {
+    width: 100%;
+    height: 17.5625rem;
+  }
+
+  .info-township__right {
+    display: none;
+  }
+
+  .info-township__good-price {
+    margin: 0.9375rem 0.9375rem 0rem 0.9375rem;
+    padding: 0.625rem 0.5rem 1rem;
+  }
+
+  .info-township__good-price-label {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-township__good-price-text {
+    font-size: 0.75rem;
+  }
+
+  .form-township {
+    padding: 0rem 0.9375rem;
+  }
+
+  .form-township__text {
+    display: none;
+  }
+
+  .form-township__input {
+    width: 100%;
+    margin: 2.6875rem 0 0.5rem;
+    min-height: 3.75rem;
+  }
+
+  .form-township__button {
+    width: 100%;
+    padding: 0.625rem;
+    height: 3.25rem;
+  }
+
+  .form-township__button:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-township__checkbox {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.1875rem;
+    border-bottom: 1px solid #D6D8E3;
+  }
+
+  .form-township__name {
+    font-weight: 500;
+    margin-bottom: 0rem;
+  }
+
+  .form-township__location {
+    margin-bottom: 0.375rem;
+  }
+
+  .free-plot__decor_township {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-top: 1.6875rem;
+  }
+
+  .bottom-township {
+    display: block;
+    position: fixed;
+    z-index: 20;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .form-button {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    bottom: -100%;
+    right: 0;
+    width: 100%;
+    -webkit-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+    background-color: #FFFFFF;
+  }
+
+  .form-button::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.8s ease 0s;
+    -o-transition: opacity 0.8s ease 0s;
+    transition: opacity 0.8s ease 0s;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .form-button.active {
+    bottom: 0;
+  }
+
+  .form-button.active::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .form-button__wrapper {
+    position: relative;
+    z-index: 2;
+    background-color: #FFFFFF;
+    padding-bottom: 0.9375rem;
+  }
+}
+
+@media (max-width: 61.99875em) and (max-width: 47.99875em) {
+  .header-inner._header-scroll .icon-menu span,
+  .header-inner._header-scroll .icon-menu::before,
+  .header-inner._header-scroll .icon-menu::after {
+    background-color: #000;
+  }
+
+  .header-inner._header-scroll {
+    border-radius: 0 0 1.25rem 1.25rem;
+  }
+
+  .header-inner._header-scroll .header-inner__phone {
+    color: #fff;
+  }
+
+  .header-inner._header-scroll .header-inner__phone::before {
+    font-size: 0.875rem;
+  }
+
+  .header-inner._header-scroll .header-inner__phone_top::before {
+    background-color: #7CDA7C;
+    padding: 0.625rem;
+    border-radius: 50%;
+  }
+
+  .header-inner._header-scroll .header-inner__label-scroll {
+    display: block;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 61.99875em) and (max-width: 47.99875em) and (max-width: 20em) {
+  .header-inner._header-scroll .header-inner__label-scroll {
+    font-size: 0.6875rem;
+  }
 }
 
 @media (max-width: 61.99875em) and (max-width: 23.375em) {
@@ -4695,9 +6176,30 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .tabs-advantage__info {
     font-size: 0.8125rem;
   }
+
+  .form-township__input {
+    font-size: 0.6875rem;
+  }
+
+  .form-township__button {
+    font-size: 0.8125rem;
+  }
+
+  .form-township__name {
+    font-size: 1rem;
+  }
+
+  .form-township__location {
+    font-size: 0.75rem;
+  }
 }
 
 @media (max-width: 47.99875em) {
+  .page_inner {
+    margin-top: 4.0625rem;
+    padding-top: 0;
+  }
+
   .swiper-pagination-bullets {
     background: rgba(0, 0, 0, 0.3);
   }
@@ -4958,47 +6460,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
             transform: rotate(45deg);
   }
 
-  .header-inner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-  }
-
-  .header-inner._header-scroll {
-    background: rgb(255, 255, 255);
-    -webkit-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
-            box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.09);
-  }
-
-  .header-inner._header-scroll .header-main__container {
-    min-height: 3.75rem;
-    color: #222222;
-  }
-
-  .header-inner._header-scroll .header-main__container:before {
-    display: none;
-  }
-
-  .header-inner._header-scroll .header-inner__logo {
-    background: url("../img/logo-color.svg") center/cover no-repeat;
-    width: 6.25rem;
-    height: 1.8125rem;
-  }
-
-  .header-inner._header-scroll .header-inner__burger span,
-  .header-inner._header-scroll .header-inner__burger::before {
-    background-color: #000;
-  }
-
-  .menu-open .header-inner._header-scroll .icon-menu::before,
-  .menu-open .header-inner._header-scroll .icon-menu::after {
-    background-color: #fff;
-  }
-
   .header-inner__container {
-    min-height: 4.6875rem;
+    min-height: 4.0625rem;
   }
 
   .header-inner__left {
@@ -5361,13 +6824,91 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     padding: 0.9375rem 0.625rem;
   }
 
-  .bottom-township {
-    display: block;
-    position: fixed;
-    z-index: 2;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+  .main-township__text {
+    margin-bottom: 0.625rem;
+  }
+
+  .about-township__text {
+    font-size: 0.8125rem;
+    line-height: 154%;
+  }
+
+  .about-township__more {
+    font-size: 0.8125rem;
+  }
+
+  .filtrs-township__promt {
+    display: none;
+  }
+
+  .filtrs-township__image-ibg {
+    padding-bottom: 73.6263736264%;
+  }
+
+  .filtrs-township__header {
+    gap: 2.5rem;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: start;
+  }
+
+  .filtrs-township__header-label {
+    font-size: 0.75rem;
+  }
+
+  .filtrs-township__header-items {
+    -ms-grid-columns: (auto)[3];
+    grid-template-columns: repeat(3, auto);
+    gap: 1.25rem;
+  }
+
+  .item-filter__label {
+    padding-left: 1.25rem;
+    font-size: 0.75rem;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 0.75rem;
+            flex: 0 0 0.75rem;
+    height: 0.625rem;
+  }
+
+  .table-township__righ-item {
+    font-size: 0.75rem;
+  }
+
+  .table-township__scrollbar {
+    display: none;
+  }
+
+  .table__slide-item.active {
+    font-size: 0.8125rem;
+  }
+
+  .table__slide-item {
+    font-size: 0.75rem;
+  }
+
+  .info-township__location-button {
+    font-size: 0.8125rem;
+    min-width: 8.75rem;
+    padding: 0.875rem 0.75rem;
+  }
+
+  .included-township__title {
+    margin-bottom: 1.0625rem;
+  }
+
+  .included-township__list {
+    -ms-grid-columns: (1fr)[2];
+    grid-template-columns: repeat(2, 1fr);
+    -webkit-column-gap: 1.25rem;
+       -moz-column-gap: 1.25rem;
+            column-gap: 1.25rem;
+  }
+
+  .free-plot__decor-item_township {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 
@@ -5386,43 +6927,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .main-block__more {
     margin-bottom: 3.75rem;
-  }
-}
-
-@media (max-width: 47.99875em) and (max-width: 47.99875em) {
-  .header-inner._header-scroll .icon-menu span,
-  .header-inner._header-scroll .icon-menu::before,
-  .header-inner._header-scroll .icon-menu::after {
-    background-color: #000;
-  }
-
-  .header-inner._header-scroll {
-    border-radius: 0 0 1.25rem 1.25rem;
-  }
-
-  .header-inner._header-scroll .header-inner__phone {
-    color: #fff;
-  }
-
-  .header-inner._header-scroll .header-inner__phone::before {
-    font-size: 0.875rem;
-  }
-
-  .header-inner._header-scroll .header-inner__phone_top::before {
-    background-color: #7CDA7C;
-    padding: 0.625rem;
-    border-radius: 50%;
-  }
-
-  .header-inner._header-scroll .header-inner__label-scroll {
-    display: block;
-    line-height: 1.4;
-  }
-}
-
-@media (max-width: 47.99875em) and (max-width: 47.99875em) and (max-width: 20em) {
-  .header-inner._header-scroll .header-inner__label-scroll {
-    font-size: 0.6875rem;
   }
 }
 
@@ -5486,6 +6990,18 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 @supports not (font-size: clamp( 1.25rem , 0.9850993377rem  +  1.3245033113vw , 2rem )) {
     .title-menu {
       font-size: calc(1.25rem + 0.75 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 1.25rem , 1.1175496689rem  +  0.6622516556vw , 1.625rem )) {
+    .title-township {
+      font-size: clamp( 1.25rem , 1.1175496689rem  +  0.6622516556vw , 1.625rem );
+    }
+}
+
+@supports not (font-size: clamp( 1.25rem , 1.1175496689rem  +  0.6622516556vw , 1.625rem )) {
+    .title-township {
+      font-size: calc(1.25rem + 0.375 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -6272,6 +7788,354 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
       font-size: calc(0.9375rem + 0.0625 * (100vw - 20rem) / 56.625);
     }
 }
+
+@supports (padding-bottom: clamp( 3.6875rem , 3.4888245033rem  +  0.9933774834vw , 4.25rem )) {
+    .main-township {
+      padding-bottom: clamp( 3.6875rem , 3.4888245033rem  +  0.9933774834vw , 4.25rem );
+    }
+}
+
+@supports not (padding-bottom: clamp( 3.6875rem , 3.4888245033rem  +  0.9933774834vw , 4.25rem )) {
+    .main-township {
+      padding-bottom: calc(3.6875rem + 0.5625 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .main-township__text {
+      font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .main-township__text {
+      font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1.6875rem , 1.2680739514rem  +  2.0971302428vw , 2.875rem )) {
+    .gallery-township {
+      margin-bottom: clamp( 1.6875rem , 1.2680739514rem  +  2.0971302428vw , 2.875rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1.6875rem , 1.2680739514rem  +  2.0971302428vw , 2.875rem )) {
+    .gallery-township {
+      margin-bottom: calc(1.6875rem + 1.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 1.75rem , 1.6616997792rem  +  0.4415011038vw , 2rem )) {
+    .about-township__title {
+      font-size: clamp( 1.75rem , 1.6616997792rem  +  0.4415011038vw , 2rem );
+    }
+}
+
+@supports not (font-size: clamp( 1.75rem , 1.6616997792rem  +  0.4415011038vw , 2rem )) {
+    .about-township__title {
+      font-size: calc(1.75rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 1.125rem , 1.0366997792rem  +  0.4415011038vw , 1.375rem )) {
+    .about-township__price {
+      font-size: clamp( 1.125rem , 1.0366997792rem  +  0.4415011038vw , 1.375rem );
+    }
+}
+
+@supports not (font-size: clamp( 1.125rem , 1.0366997792rem  +  0.4415011038vw , 1.375rem )) {
+    .about-township__price {
+      font-size: calc(1.125rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .about-township__link {
+      font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .about-township__link {
+      font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
+    .about-township__text {
+      font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
+    .about-township__text {
+      font-size: calc(0.8125rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem )) {
+    .filtrs-township {
+      margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem )) {
+    .filtrs-township {
+      margin-bottom: calc(3.875rem + 0.6875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem )) {
+    .filtrs-township__top {
+      margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem )) {
+    .filtrs-township__top {
+      margin-bottom: calc(1rem + 0.6875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1.5625rem , 1.3858995585rem  +  0.8830022075vw , 2.0625rem )) {
+    .filtrs-township__image-ibg {
+      margin-bottom: clamp( 1.5625rem , 1.3858995585rem  +  0.8830022075vw , 2.0625rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1.5625rem , 1.3858995585rem  +  0.8830022075vw , 2.0625rem )) {
+    .filtrs-township__image-ibg {
+      margin-bottom: calc(1.5625rem + 0.5 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 2.8125rem , 2.2606236203rem  +  2.7593818985vw , 4.375rem )) {
+    .info-township {
+      margin-bottom: clamp( 2.8125rem , 2.2606236203rem  +  2.7593818985vw , 4.375rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 2.8125rem , 2.2606236203rem  +  2.7593818985vw , 4.375rem )) {
+    .info-township {
+      margin-bottom: calc(2.8125rem + 1.5625 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem )) {
+    .info-township__container {
+      gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem );
+    }
+}
+
+@supports not (gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem )) {
+    .info-township__container {
+      gap: calc(0.0000000625rem + 3.3124999375 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 4rem , 3.5364238411rem  +  2.3178807947vw , 5.3125rem )) {
+    .info-township__included {
+      margin-bottom: clamp( 4rem , 3.5364238411rem  +  2.3178807947vw , 5.3125rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 4rem , 3.5364238411rem  +  2.3178807947vw , 5.3125rem )) {
+    .info-township__included {
+      margin-bottom: calc(4rem + 1.3125 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 3.8125rem , 3.2164735099rem  +  2.9801324503vw , 5.5rem )) {
+    .info-township__location {
+      margin-bottom: clamp( 3.8125rem , 3.2164735099rem  +  2.9801324503vw , 5.5rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 3.8125rem , 3.2164735099rem  +  2.9801324503vw , 5.5rem )) {
+    .info-township__location {
+      margin-bottom: calc(3.8125rem + 1.6875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem )) {
+    .info-township__location-title {
+      margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1rem , 0.7571743929rem  +  1.2141280353vw , 1.6875rem )) {
+    .info-township__location-title {
+      margin-bottom: calc(1rem + 0.6875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 4.375rem , 3.9334988962rem  +  2.2075055188vw , 5.625rem )) {
+    .info-township__important {
+      margin-bottom: clamp( 4.375rem , 3.9334988962rem  +  2.2075055188vw , 5.625rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 4.375rem , 3.9334988962rem  +  2.2075055188vw , 5.625rem )) {
+    .info-township__important {
+      margin-bottom: calc(4.375rem + 1.25 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+    .info-township__important-title {
+      margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+    .info-township__important-title {
+      margin-bottom: calc(1rem + 0.5 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (gap: clamp( 4.6875rem , 0.1621136865rem  +  22.6269315673vw , 17.5rem )) {
+    .info-township__important-body {
+      gap: clamp( 4.6875rem , 0.1621136865rem  +  22.6269315673vw , 17.5rem );
+    }
+}
+
+@supports not (gap: clamp( 4.6875rem , 0.1621136865rem  +  22.6269315673vw , 17.5rem )) {
+    .info-township__important-body {
+      gap: calc(4.6875rem + 12.8125 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .info-township__important-item {
+      font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .info-township__important-item {
+      font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+    .info-township__panorama-title {
+      margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem );
+    }
+}
+
+@supports not (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+    .info-township__panorama-title {
+      margin-bottom: calc(1rem + 0.5 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem )) {
+    .included-township__list {
+      row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem );
+    }
+}
+
+@supports not (row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem )) {
+    .included-township__list {
+      row-gap: calc(1.3125rem + 1.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .included-township__list {
+      font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .included-township__list {
+      font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 1.125rem , 1.0587748344rem  +  0.3311258278vw , 1.3125rem )) {
+    .included-township__item::before {
+      font-size: clamp( 1.125rem , 1.0587748344rem  +  0.3311258278vw , 1.3125rem );
+    }
+}
+
+@supports not (font-size: clamp( 1.125rem , 1.0587748344rem  +  0.3311258278vw , 1.3125rem )) {
+    .included-township__item::before {
+      font-size: calc(1.125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (padding-top: clamp( 2rem , 1.8013245033rem  +  0.9933774834vw , 2.5625rem )) {
+    .township__news {
+      padding-top: clamp( 2rem , 1.8013245033rem  +  0.9933774834vw , 2.5625rem );
+    }
+}
+
+@supports not (padding-top: clamp( 2rem , 1.8013245033rem  +  0.9933774834vw , 2.5625rem )) {
+    .township__news {
+      padding-top: calc(2rem + 0.5625 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (padding-top: clamp( 2.625rem , 2.4925496689rem  +  0.6622516556vw , 3rem )) {
+    .township__free-plot {
+      padding-top: clamp( 2.625rem , 2.4925496689rem  +  0.6622516556vw , 3rem );
+    }
+}
+
+@supports not (padding-top: clamp( 2.625rem , 2.4925496689rem  +  0.6622516556vw , 3rem )) {
+    .township__free-plot {
+      padding-top: calc(2.625rem + 0.375 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (padding-bottom: clamp( 1.25rem , 1.2058498896rem  +  0.2207505519vw , 1.375rem )) {
+    .township__free-plot {
+      padding-bottom: clamp( 1.25rem , 1.2058498896rem  +  0.2207505519vw , 1.375rem );
+    }
+}
+
+@supports not (padding-bottom: clamp( 1.25rem , 1.2058498896rem  +  0.2207505519vw , 1.375rem )) {
+    .township__free-plot {
+      padding-bottom: calc(1.25rem + 0.125 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (gap: clamp( 0.0000000625rem , -19.0949226527rem  +  95.4746135762vw , 54.0625rem )) {
+    .free-plot__decor_township {
+      gap: clamp( 0.0000000625rem , -19.0949226527rem  +  95.4746135762vw , 54.0625rem );
+    }
+}
+
+@supports not (gap: clamp( 0.0000000625rem , -19.0949226527rem  +  95.4746135762vw , 54.0625rem )) {
+    .free-plot__decor_township {
+      gap: calc(0.0000000625rem + 54.0624999375 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (width: clamp( 3.75rem , 2.8449227373rem  +  4.5253863135vw , 6.3125rem )) {
+    .free-plot__decor_township .free-plot__decor-item_1 {
+      width: clamp( 3.75rem , 2.8449227373rem  +  4.5253863135vw , 6.3125rem );
+    }
+}
+
+@supports not (width: clamp( 3.75rem , 2.8449227373rem  +  4.5253863135vw , 6.3125rem )) {
+    .free-plot__decor_township .free-plot__decor-item_1 {
+      width: calc(3.75rem + 2.5625 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (width: clamp( 2.375rem , 2.0438741722rem  +  1.6556291391vw , 3.3125rem )) {
+    .free-plot__decor_township .free-plot__decor-item_2 {
+      width: clamp( 2.375rem , 2.0438741722rem  +  1.6556291391vw , 3.3125rem );
+    }
+}
+
+@supports not (width: clamp( 2.375rem , 2.0438741722rem  +  1.6556291391vw , 3.3125rem )) {
+    .free-plot__decor_township .free-plot__decor-item_2 {
+      width: calc(2.375rem + 0.9375 * (100vw - 20rem) / 56.625);
+    }
+}
 }
 
 @media (max-width: 47.99875em) and (min-width: 76.625em) {
@@ -6342,13 +8206,13 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 }
 
-@media (max-width: 47.99875em) and (max-width: 47.99875em) and (min-width: 76.625em) {
+@media (max-width: 61.99875em) and (max-width: 47.99875em) and (min-width: 76.625em) {
   .header-inner._header-scroll .header-inner__label-scroll {
     font-size: 0.8125rem;
   }
 }
 
-@media (max-width: 47.99875em) and (max-width: 47.99875em) and (min-width: 20em) and (max-width: 76.625em) {
+@media (max-width: 61.99875em) and (max-width: 47.99875em) and (min-width: 20em) and (max-width: 76.625em) {
 @supports (font-size: clamp( 0.6875rem , 0.6433498896rem  +  0.2207505519vw , 0.8125rem )) {
     .header-inner._header-scroll .header-inner__label-scroll {
       font-size: clamp( 0.6875rem , 0.6433498896rem  +  0.2207505519vw , 0.8125rem );
@@ -6426,6 +8290,22 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .tabs-advantage__info {
     font-size: 0.9375rem;
   }
+
+  .form-township__input {
+    font-size: 1rem;
+  }
+
+  .form-township__button {
+    font-size: 1rem;
+  }
+
+  .form-township__name {
+    font-size: 1.125rem;
+  }
+
+  .form-township__location {
+    font-size: 0.875rem;
+  }
 }
 
 @media (max-width: 61.99875em) and (min-width: 20em) and (max-width: 76.625em) {
@@ -6464,9 +8344,69 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
       font-size: calc(0.8125rem + 0.125 * (100vw - 20rem) / 56.625);
     }
 }
+
+@supports (font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem )) {
+    .form-township__input {
+      font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem )) {
+    .form-township__input {
+      font-size: calc(0.6875rem + 0.3125 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .form-township__button {
+      font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
+    .form-township__button {
+      font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 1rem , 0.9558498896rem  +  0.2207505519vw , 1.125rem )) {
+    .form-township__name {
+      font-size: clamp( 1rem , 0.9558498896rem  +  0.2207505519vw , 1.125rem );
+    }
+}
+
+@supports not (font-size: clamp( 1rem , 0.9558498896rem  +  0.2207505519vw , 1.125rem )) {
+    .form-township__name {
+      font-size: calc(1rem + 0.125 * (100vw - 20rem) / 56.625);
+    }
+}
+
+@supports (font-size: clamp( 0.75rem , 0.7058498896rem  +  0.2207505519vw , 0.875rem )) {
+    .form-township__location {
+      font-size: clamp( 0.75rem , 0.7058498896rem  +  0.2207505519vw , 0.875rem );
+    }
+}
+
+@supports not (font-size: clamp( 0.75rem , 0.7058498896rem  +  0.2207505519vw , 0.875rem )) {
+    .form-township__location {
+      font-size: calc(0.75rem + 0.125 * (100vw - 20rem) / 56.625);
+    }
+}
 }
 
 @media (any-hover: hover) {
+  .gallery-township__close:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .gallery-township__arrows .slider-arrow:hover {
+    background-color: #5fc45f;
+  }
+
+  .gallery-township__arrows .swiper-button-disabled:hover {
+    background-color: #E3E5EF;
+  }
+
   .button:hover {
     background-color: #5fc45f;
   }
@@ -6514,6 +8454,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .menu-top__link:hover::before {
     width: 100%;
+  }
+
+  .header-inner-scroll__button:hover {
+    background-color: #142214;
   }
 
   .header-inner__phone:hover {
@@ -6580,3 +8524,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 .webp .lg-outer .lg-item:not(.lg-start-end-progress){ background: url(data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAACwBQCdASogACAAPpFCnEolo6KhqAgAsBIJaQAD5dDxrXM99232GfVDjLF0EQDwsC0CXKtWlgAA/vV76pcYbjjsL88+3qb/4UfhRX+dwASYANdOF+J5Nu61NxB7TUbHeCQeee2d4nX3M/8oPzSbTnBOl/xCNiQkRhkYBtGvv3/fXfn2CbNj/EPmnHMb/H7zFQx28TJK5yXYt1B6zlKYbIeBfYPo1h1tsfJDbPjNrzTs7O1elyh7eF4fdYd8hFly7AAAAA==) no-repeat scroll center center transparent; }
+
+@media (min-width: 47.99875em){
+
+  .webp .info-township__important-body::before{ background: url(../img/township/parus/decor_1.webp); }
+}
