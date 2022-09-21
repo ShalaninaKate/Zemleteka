@@ -8174,7 +8174,6 @@
                 observeParents: true,
                 speed: 200,
                 watchOverflow: true,
-                spaceBetween: 0,
                 slidesPerView: "auto",
                 touchRatio: 1,
                 simulateTouch: true,
