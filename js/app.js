@@ -8034,6 +8034,125 @@
                 stop
             });
         }
+        function effect_init_effectInit(params) {
+            const {effect, swiper, on, setTranslate, setTransition, overwriteParams, perspective, recreateShadows, getEffectParams} = params;
+            on("beforeInit", (() => {
+                if (swiper.params.effect !== effect) return;
+                swiper.classNames.push(`${swiper.params.containerModifierClass}${effect}`);
+                if (perspective && perspective()) swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+                const overwriteParamsResult = overwriteParams ? overwriteParams() : {};
+                Object.assign(swiper.params, overwriteParamsResult);
+                Object.assign(swiper.originalParams, overwriteParamsResult);
+            }));
+            on("setTranslate", (() => {
+                if (swiper.params.effect !== effect) return;
+                setTranslate();
+            }));
+            on("setTransition", ((_s, duration) => {
+                if (swiper.params.effect !== effect) return;
+                setTransition(duration);
+            }));
+            on("transitionEnd", (() => {
+                if (swiper.params.effect !== effect) return;
+                if (recreateShadows) {
+                    if (!getEffectParams || !getEffectParams().slideShadows) return;
+                    swiper.slides.each((slideEl => {
+                        const $slideEl = swiper.$(slideEl);
+                        $slideEl.find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").remove();
+                    }));
+                    recreateShadows();
+                }
+            }));
+            let requireUpdateOnVirtual;
+            on("virtualUpdate", (() => {
+                if (swiper.params.effect !== effect) return;
+                if (!swiper.slides.length) requireUpdateOnVirtual = true;
+                requestAnimationFrame((() => {
+                    if (requireUpdateOnVirtual && swiper.slides && swiper.slides.length) {
+                        setTranslate();
+                        requireUpdateOnVirtual = false;
+                    }
+                }));
+            }));
+        }
+        function effect_target_effectTarget(effectParams, $slideEl) {
+            if (effectParams.transformEl) return $slideEl.find(effectParams.transformEl).css({
+                "backface-visibility": "hidden",
+                "-webkit-backface-visibility": "hidden"
+            });
+            return $slideEl;
+        }
+        function effect_virtual_transition_end_effectVirtualTransitionEnd(_ref) {
+            let {swiper, duration, transformEl, allSlides} = _ref;
+            const {slides, activeIndex, $wrapperEl} = swiper;
+            if (swiper.params.virtualTranslate && 0 !== duration) {
+                let eventTriggered = false;
+                let $transitionEndTarget;
+                if (allSlides) $transitionEndTarget = transformEl ? slides.find(transformEl) : slides; else $transitionEndTarget = transformEl ? slides.eq(activeIndex).find(transformEl) : slides.eq(activeIndex);
+                $transitionEndTarget.transitionEnd((() => {
+                    if (eventTriggered) return;
+                    if (!swiper || swiper.destroyed) return;
+                    eventTriggered = true;
+                    swiper.animating = false;
+                    const triggerEvents = [ "webkitTransitionEnd", "transitionend" ];
+                    for (let i = 0; i < triggerEvents.length; i += 1) $wrapperEl.trigger(triggerEvents[i]);
+                }));
+            }
+        }
+        function EffectFade(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                fadeEffect: {
+                    crossFade: false,
+                    transformEl: null
+                }
+            });
+            const setTranslate = () => {
+                const {slides} = swiper;
+                const params = swiper.params.fadeEffect;
+                for (let i = 0; i < slides.length; i += 1) {
+                    const $slideEl = swiper.slides.eq(i);
+                    const offset = $slideEl[0].swiperSlideOffset;
+                    let tx = -offset;
+                    if (!swiper.params.virtualTranslate) tx -= swiper.translate;
+                    let ty = 0;
+                    if (!swiper.isHorizontal()) {
+                        ty = tx;
+                        tx = 0;
+                    }
+                    const slideOpacity = swiper.params.fadeEffect.crossFade ? Math.max(1 - Math.abs($slideEl[0].progress), 0) : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
+                    const $targetEl = effect_target_effectTarget(params, $slideEl);
+                    $targetEl.css({
+                        opacity: slideOpacity
+                    }).transform(`translate3d(${tx}px, ${ty}px, 0px)`);
+                }
+            };
+            const setTransition = duration => {
+                const {transformEl} = swiper.params.fadeEffect;
+                const $transitionElements = transformEl ? swiper.slides.find(transformEl) : swiper.slides;
+                $transitionElements.transition(duration);
+                effect_virtual_transition_end_effectVirtualTransitionEnd({
+                    swiper,
+                    duration,
+                    transformEl,
+                    allSlides: true
+                });
+            };
+            effect_init_effectInit({
+                effect: "fade",
+                swiper,
+                on,
+                setTranslate,
+                setTransition,
+                overwriteParams: () => ({
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    watchSlidesProgress: true,
+                    spaceBetween: 0,
+                    virtualTranslate: !swiper.params.cssMode
+                })
+            });
+        }
         function initSliders() {
             if (document.querySelector(".slider-main__slider")) new core(".slider-main__slider", {
                 modules: [ Navigation, Pagination, Autoplay ],
@@ -8101,9 +8220,10 @@
                 modules: [ Navigation, Keyboard, Mousewheel, Scrollbar ],
                 observer: true,
                 observeParents: true,
-                speed: 500,
+                speed: 200,
                 spaceBetween: 30,
                 freeMode: true,
+                grabCursor: true,
                 simulateTouch: true,
                 mousewheel: {
                     sensitivity: 1
@@ -8115,7 +8235,7 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1.7,
+                        slidesPerView: 1.8,
                         spaceBetween: 30
                     },
                     425: {
@@ -8123,7 +8243,7 @@
                         spaceBetween: 30
                     },
                     768: {
-                        slidesPerView: 2.5,
+                        slidesPerView: "auto",
                         spaceBetween: 60
                     },
                     1400: {
@@ -8135,13 +8255,15 @@
                 on: {}
             });
             if (document.querySelector(".gallery-township__slider")) new core(".gallery-township__slider", {
-                modules: [ Navigation, Keyboard, Pagination, Mousewheel ],
+                modules: [ Navigation, Keyboard, Pagination, Mousewheel, EffectFade ],
                 observer: true,
                 observeParents: true,
-                speed: 500,
+                speed: 300,
+                slidesPerView: 1,
                 spaceBetween: 16,
+                watchOverflow: true,
+                grabCursor: true,
                 simulateTouch: true,
-                effect: "fade",
                 mousewheel: {
                     sensitivity: 1
                 },
@@ -8174,10 +8296,10 @@
                 observeParents: true,
                 speed: 200,
                 watchOverflow: true,
+                grabCursor: true,
                 slidesPerView: "auto",
                 touchRatio: 1,
                 simulateTouch: true,
-                grabCursor: true,
                 effect: "fade",
                 keyboard: {
                     enabled: true,
@@ -11361,9 +11483,7 @@ PERFORMANCE OF THIS SOFTWARE.
                     menuTop.style.transitionDelay = "0.4s";
                     for (const item of menuItem) item.classList.remove("active");
                 }
-                if (!targetElement.closest(".form-button__wrapper") && !targetElement.classList.contains("bottom-township__button")) formButton.classList.remove("active");
-                document.querySelector(".filtrs-township__header-icon");
-                if (targetElement.classList.contains("filtrs-township__header-icon") || targetElement.classList.contains("filtrs-township__header-text")) ;
+                if (formButton) if (!targetElement.closest(".form-button__wrapper") && !targetElement.classList.contains("bottom-township__button")) formButton.classList.remove("active");
                 if (targetElement.classList.contains("item-filter__label")) targetElement.classList.toggle("filter-active");
             }
             const iconMenu = document.querySelector(".header__burger");
@@ -11403,6 +11523,34 @@ PERFORMANCE OF THIS SOFTWARE.
                 }));
             }
         };
+        window.addEventListener("DOMContentLoaded", (function() {
+            [].forEach.call(document.querySelectorAll(".tel"), (function(input) {
+                var keyCode;
+                function mask(event) {
+                    event.keyCode && (keyCode = event.keyCode);
+                    var pos = this.selectionStart;
+                    if (pos < 3) event.preventDefault();
+                    var matrix = "+7 (___) ___ ____", i = 0, def = matrix.replace(/\D/g, ""), val = this.value.replace(/\D/g, ""), new_value = matrix.replace(/[_\d]/g, (function(a) {
+                        return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
+                    }));
+                    i = new_value.indexOf("_");
+                    if (-1 != i) {
+                        i < 5 && (i = 3);
+                        new_value = new_value.slice(0, i);
+                    }
+                    var reg = matrix.substr(0, this.value.length).replace(/_+/g, (function(a) {
+                        return "\\d{1," + a.length + "}";
+                    })).replace(/[+()]/g, "\\$&");
+                    reg = new RegExp("^" + reg + "$");
+                    if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = new_value;
+                    if ("blur" == event.type && this.value.length < 5) this.value = "";
+                }
+                input.addEventListener("input", mask, false);
+                input.addEventListener("focus", mask, false);
+                input.addEventListener("blur", mask, false);
+                input.addEventListener("keydown", mask, false);
+            }));
+        }));
         window["FLS"] = true;
         isWebp();
         menuInit();

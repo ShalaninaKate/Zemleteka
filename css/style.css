@@ -370,8 +370,8 @@ body::after {
   width: 2.5rem;
   height: 2.5rem;
   position: absolute;
-  top: -0.875rem;
-  right: -1.1875rem;
+  top: -2.5rem;
+  right: -7.3%;
   cursor: pointer;
   z-index: 30;
   background: url("../img/icons/close-popap.svg") 50%/0.875rem 0.875rem no-repeat;
@@ -1397,6 +1397,10 @@ body::after {
   -webkit-transition: color 0.3s ease 0s;
   -o-transition: color 0.3s ease 0s;
   transition: color 0.3s ease 0s;
+}
+
+.menu__link._active {
+  color: #FF6464;
 }
 
 .menu__link:before {
@@ -2592,12 +2596,21 @@ body::after {
   display: none;
 }
 
-.gallery__slider.swiper {
-  overflow: visible;
+.wrapper-bottom {
+  -webkit-transition: all 0.3s ease 0.2s;
+  -o-transition: all 0.3s ease 0.2s;
+  transition: all 0.3s ease 0.2s;
+  position: relative;
+  z-index: 2;
+  background: #F5F5F5;
 }
 
-.gallery {
+.wrapper-bottom._watcher-view {
   background: #1E321E;
+}
+
+.gallery__slider.swiper {
+  overflow: visible;
 }
 
 .gallery__slider {
@@ -2674,10 +2687,6 @@ body::after {
   background-color: #7CDA7C;
 }
 
-.advertising {
-  background: #1E321E;
-}
-
 .advertising__body {
   background: #FFFFFF;
   border-radius: 12px;
@@ -2690,6 +2699,7 @@ body::after {
 }
 
 .advertising__text {
+  font-size: 1.0625rem;
   line-height: 1.6470588235;
 }
 
@@ -2883,6 +2893,7 @@ body::after {
 }
 
 .about-township__text {
+  font-size: 1.0625rem;
   line-height: 165%;
   text-align: justify;
   margin-bottom: 1.5rem;
@@ -2906,6 +2917,7 @@ body::after {
 .about-township__more-text {
   text-decoration: underline;
   line-height: 1.2;
+  font-weight: 500;
 }
 
 .about-township__more-arrow:before {
@@ -2932,6 +2944,8 @@ body::after {
 
 .filtrs-township__image-ibg {
   padding-bottom: 36.2876254181%;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .filtrs-township__header {
@@ -3296,6 +3310,8 @@ body::after {
 .info-township__location-map {
   max-width: 47.4375rem;
   height: 20.75rem;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 0.9375rem;
 }
 
@@ -3352,6 +3368,8 @@ body::after {
 .info-township__panorama-map {
   max-width: 47.4375rem;
   height: 20.75rem;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 0.625rem;
 }
 
@@ -3423,11 +3441,12 @@ body::after {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  line-height: 1.2;
   gap: 0.75rem;
 }
 
 .included-township__item::before {
-  font-size: 1.3125rem;
+  font-size: 1.375rem;
   justify-self: flex-start;
 }
 
@@ -3441,7 +3460,7 @@ body::after {
           flex-direction: column;
   background-color: #FFFFFF;
   border-radius: 0.75rem;
-  padding: 0.6875rem 0.9375rem 1.4375rem;
+  padding: 0.9375rem 0.9375rem 1.125rem;
   margin-bottom: 0.5625rem;
 }
 
@@ -3451,17 +3470,44 @@ body::after {
 }
 
 .form-township__text:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-township__input {
   outline: 1px solid #7F849C;
   border-radius: 8px;
   padding: 1.25rem 1rem;
+  color: #B8BAC7;
+  font-weight: 500;
+}
+
+.form-township__input::-webkit-input-placeholder {
+  color: #787C92;
+  font-weight: 400;
+}
+
+.form-township__input::-moz-placeholder {
+  color: #787C92;
+  font-weight: 400;
+}
+
+.form-township__input:-ms-input-placeholder {
+  color: #787C92;
+  font-weight: 400;
+}
+
+.form-township__input::-ms-input-placeholder {
+  color: #787C92;
+  font-weight: 400;
+}
+
+.form-township__input::placeholder {
+  color: #787C92;
+  font-weight: 400;
 }
 
 .form-township__input:not(:last-child) {
-  margin-bottom: 0.5625rem;
+  margin-bottom: 0.6875rem;
 }
 
 .form-township__input:focus {
@@ -3470,12 +3516,12 @@ body::after {
 
 .form-township__button {
   border-radius: 0.5rem;
-  padding: 1.25rem 1rem;
+  padding: 1.3125rem 1rem;
   max-height: 3.875rem;
 }
 
 .form-township__button:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: 0.9375rem;
 }
 
 .form-township__checkbox {
@@ -3548,14 +3594,14 @@ body::after {
   font-weight: 500;
   font-size: 1.125rem;
   line-height: 1.1111111111;
-  margin-bottom: 0.3125rem;
+  margin-bottom: 0.25rem;
 }
 
 .form-township__location {
   font-size: 0.875rem;
   line-height: 1.4285714286;
   color: #787C92;
-  margin-bottom: 1rem;
+  margin-bottom: 0.875rem;
 }
 
 .form-township__price {
@@ -3605,6 +3651,7 @@ body::after {
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.1;
+  margin-bottom: 0.375rem;
 }
 
 .bottom-township__info-free-plots {
@@ -3626,7 +3673,9 @@ body::after {
   background: #1E321E;
   border-radius: 8px;
   padding: 1rem;
-  min-width: 10.0625rem;
+  min-width: 10.1875rem;
+  font-weight: 600;
+  max-height: 2.75rem;
 }
 
 .township__bottom-form {
@@ -5027,10 +5076,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .advertising__text {
-    font-size: 1.0625rem;
-  }
-
-  .advertising__text {
     margin-bottom: 2.5rem;
   }
 
@@ -5062,12 +5107,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-size: 1rem;
   }
 
-  .about-township__text {
-    font-size: 1.0625rem;
-  }
-
   .filtrs-township {
-    margin-bottom: 4.5625rem;
+    margin-bottom: 5.375rem;
   }
 
   .filtrs-township__top {
@@ -5473,10 +5514,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .advertising__text {
-    font-size: 0.8125rem;
-  }
-
-  .advertising__text {
     margin-bottom: 1.25rem;
   }
 
@@ -5505,10 +5542,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .about-township__link {
-    font-size: 0.8125rem;
-  }
-
-  .about-township__text {
     font-size: 0.8125rem;
   }
 
@@ -5549,7 +5582,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .info-township__important-title {
-    margin-bottom: 1rem;
+    margin-bottom: 1.125rem;
   }
 
   .info-township__important-body {
@@ -5565,7 +5598,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .included-township__list {
-    row-gap: 1.3125rem;
+    row-gap: 1.9375rem;
   }
 
   .included-township__list {
@@ -6046,7 +6079,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .form-township__checkbox {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1875rem;
     padding-bottom: 1.1875rem;
     border-bottom: 1px solid #D6D8E3;
   }
@@ -6119,6 +6152,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .form-button__wrapper {
+    border-radius: 0.9375rem 0.9375rem 0 0;
     position: relative;
     z-index: 2;
     background-color: #FFFFFF;
@@ -6182,8 +6216,24 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-size: 0.8125rem;
   }
 
-  .form-township__input {
-    font-size: 0.6875rem;
+  .form-township__input::-webkit-input-placeholder {
+    font-size: 0.75rem;
+  }
+
+  .form-township__input::-moz-placeholder {
+    font-size: 0.75rem;
+  }
+
+  .form-township__input:-ms-input-placeholder {
+    font-size: 0.75rem;
+  }
+
+  .form-township__input::-ms-input-placeholder {
+    font-size: 0.75rem;
+  }
+
+  .form-township__input::placeholder {
+    font-size: 0.75rem;
   }
 
   .form-township__button {
@@ -6394,9 +6444,14 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .menu__button {
-    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     width: 100%;
-    padding: 0.9375rem 0.625rem;
+    padding: 5px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-height: 3.25rem;
   }
 
   .menu-top {
@@ -6617,9 +6672,18 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .menu__button {
-    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
-    padding: 0.9375rem 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 600;
   }
 
   .menu-top {
@@ -6813,6 +6877,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     padding: 1.9375rem 1.3125rem 1.3125rem;
   }
 
+  .advertising__text {
+    font-size: 0.8125rem;
+  }
+
   .advertising__text p:not(:last-child) {
     margin-bottom: 0.3125rem;
   }
@@ -6836,6 +6904,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .about-township__text {
     font-size: 0.8125rem;
     line-height: 154%;
+    text-align: left;
   }
 
   .about-township__more {
@@ -6899,7 +6968,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .included-township__title {
-    margin-bottom: 1.0625rem;
+    margin-bottom: 1.3125rem;
   }
 
   .included-township__list {
@@ -6908,6 +6977,12 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     -webkit-column-gap: 1.25rem;
        -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
+  }
+
+  .free-plot__decor_township {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 
   .free-plot__decor-item_township {
@@ -7758,18 +7833,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .advertising__text {
-      font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem );
-    }
-}
-
-@supports not (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .advertising__text {
-      font-size: calc(0.8125rem + 0.25 * (100vw - 20rem) / 56.625);
-    }
-}
-
 @supports (margin-bottom: clamp( 1.25rem , 0.8084988962rem  +  2.2075055188vw , 2.5rem )) {
     .advertising__text {
       margin-bottom: clamp( 1.25rem , 0.8084988962rem  +  2.2075055188vw , 2.5rem );
@@ -7866,27 +7929,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .about-township__text {
-      font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem );
-    }
-}
-
-@supports not (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .about-township__text {
-      font-size: calc(0.8125rem + 0.25 * (100vw - 20rem) / 56.625);
-    }
-}
-
-@supports (margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem )) {
+@supports (margin-bottom: clamp( 3.875rem , 3.3451986755rem  +  2.6490066225vw , 5.375rem )) {
     .filtrs-township {
-      margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem );
+      margin-bottom: clamp( 3.875rem , 3.3451986755rem  +  2.6490066225vw , 5.375rem );
     }
 }
 
-@supports not (margin-bottom: clamp( 3.875rem , 3.6321743929rem  +  1.2141280353vw , 4.5625rem )) {
+@supports not (margin-bottom: clamp( 3.875rem , 3.3451986755rem  +  2.6490066225vw , 5.375rem )) {
     .filtrs-township {
-      margin-bottom: calc(3.875rem + 0.6875 * (100vw - 20rem) / 56.625);
+      margin-bottom: calc(3.875rem + 1.5 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -7986,15 +8037,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+@supports (margin-bottom: clamp( 1.125rem , 0.9925496689rem  +  0.6622516556vw , 1.5rem )) {
     .info-township__important-title {
-      margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem );
+      margin-bottom: clamp( 1.125rem , 0.9925496689rem  +  0.6622516556vw , 1.5rem );
     }
 }
 
-@supports not (margin-bottom: clamp( 1rem , 0.8233995585rem  +  0.8830022075vw , 1.5rem )) {
+@supports not (margin-bottom: clamp( 1.125rem , 0.9925496689rem  +  0.6622516556vw , 1.5rem )) {
     .info-township__important-title {
-      margin-bottom: calc(1rem + 0.5 * (100vw - 20rem) / 56.625);
+      margin-bottom: calc(1.125rem + 0.375 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -8034,15 +8085,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem )) {
+@supports (row-gap: clamp( 1.9375rem , 1.7388245033rem  +  0.9933774834vw , 2.5rem )) {
     .included-township__list {
-      row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem );
+      row-gap: clamp( 1.9375rem , 1.7388245033rem  +  0.9933774834vw , 2.5rem );
     }
 }
 
-@supports not (row-gap: clamp( 1.3125rem , 0.8930739514rem  +  2.0971302428vw , 2.5rem )) {
+@supports not (row-gap: clamp( 1.9375rem , 1.7388245033rem  +  0.9933774834vw , 2.5rem )) {
     .included-township__list {
-      row-gap: calc(1.3125rem + 1.1875 * (100vw - 20rem) / 56.625);
+      row-gap: calc(1.9375rem + 0.5625 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -8296,7 +8347,23 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-size: 0.9375rem;
   }
 
-  .form-township__input {
+  .form-township__input::-webkit-input-placeholder {
+    font-size: 1rem;
+  }
+
+  .form-township__input::-moz-placeholder {
+    font-size: 1rem;
+  }
+
+  .form-township__input:-ms-input-placeholder {
+    font-size: 1rem;
+  }
+
+  .form-township__input::-ms-input-placeholder {
+    font-size: 1rem;
+  }
+
+  .form-township__input::placeholder {
     font-size: 1rem;
   }
 
@@ -8350,15 +8417,39 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem )) {
-    .form-township__input {
-      font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem );
+@supports (font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem )) {
+    .form-township__input::-webkit-input-placeholder {
+      font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem );
+    }
+    .form-township__input::-moz-placeholder {
+      font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem );
+    }
+    .form-township__input:-ms-input-placeholder {
+      font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem );
+    }
+    .form-township__input::-ms-input-placeholder {
+      font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem );
+    }
+    .form-township__input::placeholder {
+      font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem );
     }
 }
 
-@supports not (font-size: clamp( 0.6875rem , 0.5771247241rem  +  0.5518763797vw , 1rem )) {
-    .form-township__input {
-      font-size: calc(0.6875rem + 0.3125 * (100vw - 20rem) / 56.625);
+@supports not (font-size: clamp( 0.75rem , 0.6616997792rem  +  0.4415011038vw , 1rem )) {
+    .form-township__input::-webkit-input-placeholder {
+      font-size: calc(0.75rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+    .form-township__input::-moz-placeholder {
+      font-size: calc(0.75rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+    .form-township__input:-ms-input-placeholder {
+      font-size: calc(0.75rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+    .form-township__input::-ms-input-placeholder {
+      font-size: calc(0.75rem + 0.25 * (100vw - 20rem) / 56.625);
+    }
+    .form-township__input::placeholder {
+      font-size: calc(0.75rem + 0.25 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -8519,6 +8610,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     -webkit-transform: translate(0px, -5px);
         -ms-transform: translate(0px, -5px);
             transform: translate(0px, -5px);
+    -webkit-box-shadow: 0px 0px 30px rgba(31, 31, 38, 0.1);
+            box-shadow: 0px 0px 30px rgba(31, 31, 38, 0.1);
+    border-radius: 5px;
   }
 
   .gallery__slide-image:hover img {
