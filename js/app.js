@@ -8236,7 +8236,8 @@
                 breakpoints: {
                     320: {
                         slidesPerView: 1.8,
-                        spaceBetween: 30
+                        spaceBetween: 30,
+                        slidesPerGroup: 1
                     },
                     425: {
                         slidesPerView: 2.1,
@@ -8246,10 +8247,13 @@
                         slidesPerView: "auto",
                         spaceBetween: 60
                     },
+                    992: {
+                        slidesPerGroup: 3
+                    },
                     1400: {
                         slidesPerView: "auto",
                         spaceBetween: 60,
-                        slidesPerGroup: 2
+                        slidesPerGroup: 3
                     }
                 },
                 on: {}
