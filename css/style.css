@@ -798,6 +798,28 @@ body::after {
   z-index: 1;
 }
 
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.input {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  padding: 0px 20px;
+  border: 1px solid #eee;
+}
+
+textarea.input {
+  resize: none;
+  padding: 0px 0px;
+}
+
 .header-main {
   position: fixed;
   top: 0;
@@ -2499,6 +2521,12 @@ body::after {
   padding: 1.8125rem;
 }
 
+.advantage__text {
+  text-align: justify;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
 .advantage__text p:not(:last-child) {
   margin-bottom: 0.5882352941em;
 }
@@ -2711,7 +2739,9 @@ body::after {
 }
 
 .advertising__text {
+  font-size: 1.0625rem;
   line-height: 1.5;
+  text-align: justify;
 }
 
 .advertising__text p:not(:last-child) {
@@ -2905,6 +2935,7 @@ body::after {
 
 .about-township__text {
   line-height: 1.5;
+  font-size: 1.0625rem;
   text-align: justify;
   margin-bottom: 1.5rem;
 }
@@ -3533,6 +3564,7 @@ body::after {
   border-radius: 0.5rem;
   padding: 1.3125rem 1rem;
   max-height: 3.875rem;
+  font-weight: 600;
 }
 
 .form-township__button:not(:last-child) {
@@ -4834,8 +4866,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     max-width: 47%;
     right: 0;
     padding: 0 4.9375rem 0 4.5625rem;
-    text-align: justify;
-    line-height: 1.67;
   }
 
   .tabs-advantage__content {
@@ -5075,10 +5105,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     gap: 30.25rem;
   }
 
-  .advantage__text {
-    font-size: 1.125rem;
-  }
-
   .advantage__decor {
     margin-top: -4.375rem;
   }
@@ -5144,10 +5170,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .advertising__text {
-    font-size: 1.0625rem;
-  }
-
-  .advertising__text {
     margin-bottom: 2.5rem;
   }
 
@@ -5177,10 +5199,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .about-township__link {
     font-size: 1rem;
-  }
-
-  .about-township__text {
-    font-size: 1.0625rem;
   }
 
   .filtrs-township {
@@ -5525,10 +5543,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     gap: 0.0000000625rem;
   }
 
-  .advantage__text {
-    font-size: 0.8125rem;
-  }
-
   .advantage__decor {
     margin-top: 0.0000000625rem;
   }
@@ -5594,10 +5608,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .advertising__text {
-    font-size: 0.8125rem;
-  }
-
-  .advertising__text {
     margin-bottom: 1.25rem;
   }
 
@@ -5626,10 +5636,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .about-township__link {
-    font-size: 0.8125rem;
-  }
-
-  .about-township__text {
     font-size: 0.8125rem;
   }
 
@@ -6008,10 +6014,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .advantage__wrapper {
     padding: 2.1875rem 0;
-  }
-
-  .advantage__text {
-    line-height: 1.5;
   }
 
   .advantage__decor {
@@ -6960,8 +6962,16 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     display: none;
   }
 
+  .advantage__text {
+    font-size: 0.875rem;
+  }
+
   .advertising__body {
     padding: 1.9375rem 1.3125rem 1.3125rem;
+  }
+
+  .advertising__text {
+    font-size: 0.875rem;
   }
 
   .advertising__text p:not(:last-child) {
@@ -6985,7 +6995,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .about-township__text {
-    text-align: left;
+    font-size: 0.875rem;
   }
 
   .about-township__more {
@@ -7750,18 +7760,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 0.8125rem , 0.7021247241rem  +  0.5518763797vw , 1.125rem )) {
-    .advantage__text {
-      font-size: clamp( 0.8125rem , 0.7021247241rem  +  0.5518763797vw , 1.125rem );
-    }
-}
-
-@supports not (font-size: clamp( 0.8125rem , 0.7021247241rem  +  0.5518763797vw , 1.125rem )) {
-    .advantage__text {
-      font-size: calc(0.8125rem + 0.3125 * (100vw - 20rem) / 56.625);
-    }
-}
-
 @supports (margin-top: clamp( -4.375rem , 1.5452539477rem  +  -7.726269426vw , 0.0000000625rem )) {
     .advantage__decor {
       margin-top: clamp( -4.375rem , 1.5452539477rem  +  -7.726269426vw , 0.0000000625rem );
@@ -7954,18 +7952,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .advertising__text {
-      font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem );
-    }
-}
-
-@supports not (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .advertising__text {
-      font-size: calc(0.8125rem + 0.25 * (100vw - 20rem) / 56.625);
-    }
-}
-
 @supports (margin-bottom: clamp( 1.25rem , 0.8084988962rem  +  2.2075055188vw , 2.5rem )) {
     .advertising__text {
       margin-bottom: clamp( 1.25rem , 0.8084988962rem  +  2.2075055188vw , 2.5rem );
@@ -8059,18 +8045,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 @supports not (font-size: clamp( 0.8125rem , 0.7462748344rem  +  0.3311258278vw , 1rem )) {
     .about-township__link {
       font-size: calc(0.8125rem + 0.1875 * (100vw - 20rem) / 56.625);
-    }
-}
-
-@supports (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .about-township__text {
-      font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem );
-    }
-}
-
-@supports not (font-size: clamp( 0.8125rem , 0.7241997792rem  +  0.4415011038vw , 1.0625rem )) {
-    .about-township__text {
-      font-size: calc(0.8125rem + 0.25 * (100vw - 20rem) / 56.625);
     }
 }
 
