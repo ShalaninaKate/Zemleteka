@@ -4392,6 +4392,10 @@ body::after {
   display: block;
 }
 
+.plots-catalog {
+  position: relative;
+}
+
 .plots-catalog__body {
   background: #EDEDF1;
   border-radius: 1.25rem;
@@ -5915,6 +5919,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .plots-catalog__header-close {
     margin-bottom: 1.8125rem;
   }
+
+  .plots-catalog__header-close_mob {
+    display: none;
+  }
 }
 
 @media (min-width: 61.99875em) and (min-width: 76.625em) {
@@ -6842,9 +6850,9 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .townships-filter__popap {
     padding: 0.4375rem 0 0 0;
-    -webkit-transition: all 0s ease 0s;
-    -o-transition: all 0s ease 0s;
-    transition: all 0s ease 0s;
+    -webkit-transition: all 0.2s ease 0s;
+    -o-transition: all 0.2s ease 0s;
+    transition: all 0.2s ease 0s;
   }
 
   .townships-filter__content {
@@ -7363,15 +7371,21 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .plots-catalog__header-close {
     background-color: #1E321E;
-    position: fixed;
-    bottom: 4.25rem;
-    right: 0;
     padding: 0.875rem;
+    position: relative;
+    z-index: 15;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 2.375rem;
+            flex: 0 0 2.375rem;
   }
 
   .plots-catalog__header-close::before {
     font-size: 0.625rem;
     color: #ffffff;
+  }
+
+  .plots-catalog__header-close_desk {
+    display: none;
   }
 
   .plots-catalog__content {

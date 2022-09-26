@@ -5,9 +5,9 @@
 	<title>Поселки</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220926142216" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220926160919" rel="stylesheet" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220926142216">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220926160919">
 	<!-- <link rel="shortcut icon" href="favicon.ico"> -->
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,7 +147,7 @@
 				<div class="townships-catalog__sale">
 					<div class="townships-catalog__container">
 						<h3 class="townships-catalog__title">Поселки с участками в продаже</h3>
-						<div class="townships-catalog__plots plots-catalog">
+						<div data-sticky data-sticky-header class="townships-catalog__plots plots-catalog">
 							<div class="plots-catalog__body">
 								<div data-scroll="1" class="plots-catalog__header">
 									<div class="plots-catalog__header-wrapper">
@@ -159,8 +159,8 @@
 											<div class="plots-catalog__header-title">Земельные участки</div>
 										</div>
 										<div class="plots-catalog__header-right">
-											<button type="button" class="plots-catalog__header-close _icon-close">
-												<!-- <img src="img/icons/close.svg" alt=""> -->
+											<button type="button" class="plots-catalog__header-close plots-catalog__header-close_desk _icon-close">
+
 											</button>
 											<div class="plots-catalog__header-filter">
 												<div class="filters-items">
@@ -200,6 +200,9 @@
 
 								</div>
 								<div class="plots-catalog__content">
+									<button data-sticky-item type="button" class="plots-catalog__header-close plots-catalog__header-close_mob _icon-close">
+
+									</button>
 									<div class="plots-catalog__title ">Земельные участки</div>
 									<div class="plots-catalog__items">
 										<a href="" class="plots-catalog__item item-plot">
@@ -916,7 +919,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220926142216"></script>
+	<script src="js/app.min.js?_v=20220926160919"></script>
 </body>
 
 </html>
