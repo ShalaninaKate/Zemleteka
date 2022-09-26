@@ -5,9 +5,9 @@
 	<title>Главная</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220923104050" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220926142216" rel="stylesheet" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220923104050">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220926142216">
 	<!-- <link rel="shortcut icon" href="favicon.ico"> -->
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -722,9 +722,7 @@
 		<div class="popup__wrapper gallery-township__wrapper">
 			<div class="popup__content gallery-township__content">
 				<button data-close type="button" class="popup__close gallery-township__close">
-
 				</button>
-
 				<div class="popup__text gallery-township__text">
 					<div class="gallery-township__body">
 						<!-- Оболочка слайдера -->
@@ -753,52 +751,150 @@
 								<button type="button" class="slider-arrow slider-arrow_next _icon-arrow"></button>
 							</div>
 							<div class="gallery-township__pagination swiper-pagination"></div>
-							<!-- <a href="#" class="gallery-township__link-back _icon-arrow-down"></a>
-						<a href="#" class="gallery-township__share _icon-share"></a> -->
 						</div>
 					</div>
-
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- <div id="popup-bottom-township" aria-hidden="true" class="popup popup-callback">
-	<div class="popup__wrapper popup-callback__wrapper">
-		<div class="popup__content popup-callback__content">
-			<div class="form-township-top">
-				<div class="form-township-title">Записаться на просмотр</div>
-				<button data-close type="button" class="popup__close popup-callback__close">
-					<img src="img/icons/close.svg" alt="">
-				</button>
-			</div>
-			<div class="popup__text">
-				<form action="" class="popap__form-township">
-					<input type="text" class="form-township__input input " placeholder="Ваш телефон">
-					<button type="submit" class="form-township__button button_black">Отправить</button>
-					<div class="form-township__checkbox">
-						<input id="formAgreement" type="checkbox" class="form-township__checkbox-input"
-							name="agreement" class="form-township__checkbox">
-						<label for="formAgreement" class="form-township__checkbox-label"><a href="">С политикой
-								конфиденциальности ознакомлен</a></label>
-					</div>
-					<div class="form-township__name">СНТ «Парус»</div>
-					<div class="form-township__location">Минское шоссе, 63 км от МКАД</div>
-					<div class="form-township__price">от 107 000 ₽/сот</div>
-				</form>
-				<div class="info-township__good-price">
-					<div class="info-township__good-price-icon _icon-good-price"></div>
-					<div class="info-township__good-price-info">
-						<div class="info-township__good-price-label">Хорошая цена</div>
-						<div class="info-township__good-price-text">В среднем цена растет на 9% в год</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div> -->
-	<script src="js/app.min.js?_v=20220923104050"></script>
+
+
+
+	<div id="townships-filter" aria-hidden="true" class="popup townships-filter__popap">
+		<div class="popup__wrapper townships-filter__wrapper">
+			<div class="popup__content townships-filter__content">
+				<div class="townships-filter__header">
+					<div class="townships-filter__title">Фильтры</div>
+					<button data-close type="button" class="popup__close townships-filter__close">
+						<img src="img/icons/close.svg" alt="">
+					</button>
+				</div>
+
+				<div class="popup__text townships-filter__body">
+
+					<div class="townships-filter__range">
+						<div class="townships-filter__range-item item-range">
+							<h3 class="item-range__title">Стоимость участка, ₽</h3>
+							<div class="item-range__slider" id="range-slider-price"></div>
+							<div class="item-range__inputs">
+								<label class="item-range__label">
+									<span class="item-range__text">мин. цена</span>
+									<input type="text" class="item-range__input" id="input-0">
+								</label>
+								<div class="item-range__label-separation"></div>
+								<label class="item-range__label">
+									<span class="item-range__text">макс. цена</span>
+									<input type="text" class="item-range__input" id="input-1">
+								</label>
+							</div>
+						</div>
+						<div class="townships-filter__range-item item-range">
+							<h3 class="item-range__title">Площадь участка (сот.)</h3>
+							<div class="item-range__slider" id="range-slider-square"></div>
+							<div class="item-range__inputs">
+								<label class="item-range__label">
+									<span class="item-range__text">мин. площадь</span>
+									<input type="text" class="item-range__input" id="input-square-0">
+								</label>
+								<div class="item-range__label-separation"></div>
+								<label class="item-range__label">
+									<span class="item-range__text">макс. площадь</span>
+									<input type="text" class="item-range__input" id="input-square-1">
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="townships-filter__choice township-choice choice">
+						<h3 class="choice__title">Поселки</h3>
+						<div class="choice__inputs">
+							<div class="choice__checkbox">
+								<input id="townshipChoice1" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice1" class="choice__checkbox-label">Парус</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="townshipChoice2" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice2" class="choice__checkbox-label">Таширово улица Молодёжная</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="townshipChoice3" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice3" class="choice__checkbox-label">Облака</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="townshipChoice4" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice4" class="choice__checkbox-label">Загородный 3</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="townshipChoice5" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice5" class="choice__checkbox-label">Загородный 2</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="townshipChoice6" type="checkbox" class="choice__checkbox-input" name="townshipChoice">
+								<label for="townshipChoice6" class="choice__checkbox-label">Луговое</label>
+							</div>
+						</div>
+					</div>
+					<div class="townships-filter__choice townships-filter__choice_last plot-choice choice">
+						<h3 class="choice__title">Что входит?</h3>
+						<div class="choice__inputs">
+							<div class="choice__checkbox">
+								<input id="plotChoice1" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice1" class="choice__checkbox-label">Умная газификация</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice2" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice2" class="choice__checkbox-label">Водопровод</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice3" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice3" class="choice__checkbox-label">Канализация</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice4" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice4" class="choice__checkbox-label">Интернет</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice5" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice5" class="choice__checkbox-label">Пляжная зона</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice6" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice6" class="choice__checkbox-label">У леса</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice7" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice7" class="choice__checkbox-label">Автобусная остановка</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice8" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice8" class="choice__checkbox-label">Магазин</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice9" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice9" class="choice__checkbox-label">Дороги внутри</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice10" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice10" class="choice__checkbox-label">Рыбалка</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice11" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice11" class="choice__checkbox-label">Охрана</label>
+							</div>
+							<div class="choice__checkbox">
+								<input id="plotChoice12" type="checkbox" class="choice__checkbox-input" name="plotChoice">
+								<label for="plotChoice12" class="choice__checkbox-label">Игровая площадка</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-da=".townships-filter__wrapper,991.98,1" class="townships-filter__bottom">
+					<button type="button" class="townships-filter__reset">Сбросить <span> все фильтры</span></button>
+					<button data-close type="button" class="townships-filter__showmore">Показать &nbsp <span>127</span> &nbsp участков</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20220926142216"></script>
 </body>
 
 </html>
