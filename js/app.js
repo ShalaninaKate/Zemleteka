@@ -11259,6 +11259,34 @@
                 scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
             }));
         }
+        function closeScroll() {
+            const close = document.querySelector(".plots-catalog__header-close");
+            if (close) {
+                addWindowScrollEvent = true;
+                const headerShow = close.hasAttribute("data-scroll-show");
+                const headerShowTimer = close.dataset.scrollShow ? close.dataset.scrollShow : 500;
+                const startPoint = close.dataset.scroll ? close.dataset.scroll : 1;
+                let scrollDirection = 0;
+                let timer;
+                document.addEventListener("windowScroll", (function(e) {
+                    const scrollTop = window.scrollY;
+                    clearTimeout(timer);
+                    if (scrollTop >= startPoint) {
+                        !close.classList.contains("_header-scroll") ? close.classList.add("_header-scroll") : null;
+                        if (headerShow) {
+                            if (scrollTop > scrollDirection) close.classList.contains("_header-show") ? close.classList.remove("_header-show") : null; else !close.classList.contains("_header-show") ? close.classList.add("_header-show") : null;
+                            timer = setTimeout((() => {
+                                !close.classList.contains("_header-show") ? close.classList.add("_header-show") : null;
+                            }), headerShowTimer);
+                        }
+                    } else {
+                        close.classList.contains("_header-scroll") ? close.classList.remove("_header-scroll") : null;
+                        if (headerShow) close.classList.contains("_header-show") ? close.classList.remove("_header-show") : null;
+                    }
+                    scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
+                }));
+            }
+        }
         function formScroll() {
             const form = document.querySelector(".plots-catalog__header");
             if (form) {
@@ -13434,6 +13462,7 @@ PERFORMANCE OF THIS SOFTWARE.
         pageNavigation();
         headerScroll();
         formScroll();
+        closeScroll();
         stickyBlock();
     })();
 })();

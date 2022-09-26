@@ -4319,11 +4319,11 @@ body::after {
 }
 
 .townships-catalog__sale {
-  padding-top: 1.25rem;
   padding-bottom: 5.625rem;
 }
 
 .townships-catalog__title {
+  padding-top: 1.25rem;
   font-weight: 600;
   font-size: 2rem;
   line-height: 1.2;
@@ -4392,10 +4392,6 @@ body::after {
   display: block;
 }
 
-.plots-catalog {
-  position: relative;
-}
-
 .plots-catalog__body {
   background: #EDEDF1;
   border-radius: 1.25rem;
@@ -4415,9 +4411,9 @@ body::after {
           align-items: stretch;
   min-height: 7.25rem;
   padding: 0.6875rem 0rem;
-  -webkit-transition: min-height 0.3s ease 0s;
-  -o-transition: min-height 0.3s ease 0s;
-  transition: min-height 0.3s ease 0s;
+  -webkit-transition: min-height 0.7s ease 0s;
+  -o-transition: min-height 0.7s ease 0s;
+  transition: min-height 0.7s ease 0s;
 }
 
 .plots-catalog__header-left {
@@ -4500,6 +4496,30 @@ body::after {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+}
+
+.plots-catalog__content {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100%;
+}
+
+.plots-catalog__content-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .plots-catalog__title {
@@ -5918,10 +5938,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .plots-catalog__header-close {
     margin-bottom: 1.8125rem;
-  }
-
-  .plots-catalog__header-close_mob {
-    display: none;
   }
 }
 
@@ -7372,7 +7388,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   .plots-catalog__header-close {
     background-color: #1E321E;
     padding: 0.875rem;
-    position: relative;
     z-index: 15;
     -webkit-box-flex: 0;
         -ms-flex: 0 0 2.375rem;
@@ -7384,12 +7399,20 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     color: #ffffff;
   }
 
-  .plots-catalog__header-close_desk {
-    display: none;
+  .plots-catalog__header-close._header-scroll {
+    position: fixed;
+    top: 4.0625rem;
+    right: 0.3125rem;
   }
 
-  .plots-catalog__content {
-    position: relative;
+  .plots-catalog__content-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin-bottom: 0.875rem;
   }
 
   .plots-catalog__title {
@@ -7397,7 +7420,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 1.2083333333;
-    margin-bottom: 0.875rem;
   }
 
   .plots-catalog__items {
@@ -8329,8 +8351,12 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-size: 1.5rem;
   }
 
+  .plots-catalog__container {
+    padding: 0;
+  }
+
   .plots-catalog__body {
-    padding: 1.8125rem 0.9375rem 0.9375rem;
+    padding: 1.1875rem 0.9375rem 0.9375rem;
     margin: 0;
   }
 
