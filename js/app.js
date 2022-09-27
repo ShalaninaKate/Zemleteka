@@ -13410,6 +13410,15 @@ PERFORMANCE OF THIS SOFTWARE.
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
                 if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.toggle("active");
                 if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
+                const inputTel = document.querySelector(".bottom-reserv__input");
+                if (inputTel) {
+                    inputTel.onfocus = function() {
+                        bottomReserv.classList.add("no-fixed-bottom-container");
+                    };
+                    inputTel.onblur = function() {
+                        bottomReserv.classList.remove("no-fixed-bottom-container");
+                    };
+                }
             }
             const iconMenu = document.querySelector(".header__burger");
             const menuTop = document.querySelector(".menu-top");

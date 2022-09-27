@@ -8185,6 +8185,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin: 0;
   }
 
+  .bottom-reserv.no-fixed-bottom-container {
+    position: relative;
+  }
+
   .bottom-reserv__title {
     font-size: 1.125rem;
     margin-bottom: 0.625rem;
