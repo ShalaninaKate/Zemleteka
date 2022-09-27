@@ -9979,6 +9979,22 @@
                 },
                 on: {}
             });
+            if (document.querySelector(".plot__slider")) new core(".plot__slider", {
+                modules: [ Navigation, Pagination, Autoplay ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                spaceBetween: 0,
+                autoHeight: true,
+                speed: 500,
+                loop: true,
+                effect: "fade",
+                pagination: {
+                    el: ".plot__dotts",
+                    clickable: true
+                },
+                on: {}
+            });
         }
         window.addEventListener("load", (function(e) {
             initSliders();
@@ -13389,6 +13405,10 @@ PERFORMANCE OF THIS SOFTWARE.
                 if (targetElement.classList.contains("townships-filter__showmore")) plotsFilter.classList.add("active");
                 if (targetElement.classList.contains("plots-catalog__header-close")) plotsFilter.classList.remove("active");
                 if (plotsFilterButton) if (plotsFilter.classList.contains("active")) plotsFilterButton.classList.add("hide"); else plotsFilterButton.classList.remove("hide");
+                const bottomReserv = document.querySelector(".bottom-reserv");
+                const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
+                if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.add("active");
+                if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide"); else plotsFilterButton.classList.remove("_hide");
             }
             const iconMenu = document.querySelector(".header__burger");
             const menuTop = document.querySelector(".menu-top");
