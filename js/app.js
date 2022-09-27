@@ -13408,7 +13408,7 @@ PERFORMANCE OF THIS SOFTWARE.
                 const bottomReserv = document.querySelector(".bottom-reserv");
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
                 if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.add("active");
-                if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide"); else plotsFilterButton.classList.remove("_hide");
+                if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
             }
             const iconMenu = document.querySelector(".header__burger");
             const menuTop = document.querySelector(".menu-top");
