@@ -8158,7 +8158,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .bottom-reserv__title {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin-bottom: 0.625rem;
   }
 
@@ -8167,12 +8167,21 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 0.9375rem;
   }
 
+  .bottom-reserv__item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
   .bottom-reserv__input {
     height: 2.75rem;
+    width: 100%;
   }
 
   .bottom-reserv__button {
     min-height: 2.75rem;
+    width: 100%;
   }
 
   .page_inner {
