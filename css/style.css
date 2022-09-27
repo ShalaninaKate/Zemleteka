@@ -738,11 +738,9 @@ body::after {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   width: 100%;
-  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  align-items: center;
 }
 
 .popup__content {
@@ -1436,10 +1434,6 @@ body::after {
   transition: all 0.3s ease 0s;
 }
 
-.plot__bottom-reservation._hide {
-  display: none;
-}
-
 .bottom-reserv {
   display: none;
   -webkit-transition: all 0.3s ease 0s;
@@ -1575,7 +1569,6 @@ body::after {
   max-width: 19.375rem;
   margin: 0 auto;
   margin-top: 1.5rem;
-  margin-bottom: 1.4375rem;
 }
 
 .bottom-reserv__checkbox-input {
@@ -6206,6 +6199,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     width: 100%;
   }
 
+  .plot__bottom-reservation._hide {
+    display: none;
+  }
+
   .menu__link._active:after {
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
@@ -8087,7 +8084,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .plot__title {
-    font-size: 1.25rem;
+    font-size: 1.0625rem;
   }
 
   .plot__close {
@@ -8101,6 +8098,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     border: 0.5px solid #8F8F8F;
     border-radius: 50%;
     z-index: 2;
+  }
+
+  .plot__body {
+    margin-bottom: 6.25rem;
   }
 
   .plot__info {
@@ -8145,6 +8146,19 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 1.875rem;
   }
 
+  .plot__bottom {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    padding: 0 1.25rem;
+    min-height: 4.4375rem;
+    border-top: 1px solid #D6D8E3;
+    margin: 0;
+  }
+
   .plot__bottom-price1 {
     font-size: 0.875rem;
   }
@@ -8153,8 +8167,22 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     font-size: 1.0625rem;
   }
 
+  .bottom-reserv {
+    position: fixed;
+    width: 100%;
+    bottom: -100%;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    padding: 0 1.25rem;
+    min-height: 4.4375rem;
+    border-top: 1px solid #D6D8E3;
+  }
+
   .bottom-reserv.active {
-    padding: 1.25rem 1.875rem 0rem;
+    bottom: 4.375rem;
+    padding: 1.25rem;
+    margin: 0;
   }
 
   .bottom-reserv__title {
@@ -8180,8 +8208,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .bottom-reserv__button {
-    min-height: 2.75rem;
-    width: 100%;
+    display: none;
   }
 
   .page_inner {

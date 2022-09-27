@@ -5178,6 +5178,7 @@
                     setAutoplayYoutube: true,
                     classes: {
                         popup: "popup",
+                        popupWrapper: "popup__wrapper",
                         popupContent: "popup__content",
                         popupActive: "popup_show",
                         bodyActive: "popup-show"
@@ -5256,7 +5257,7 @@
                         return;
                     }
                     const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
-                    if (buttonClose || !e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen) {
+                    if (buttonClose && this.isOpen) {
                         e.preventDefault();
                         this.close();
                         return;
@@ -13407,7 +13408,7 @@ PERFORMANCE OF THIS SOFTWARE.
                 if (plotsFilterButton) if (plotsFilter.classList.contains("active")) plotsFilterButton.classList.add("hide"); else plotsFilterButton.classList.remove("hide");
                 const bottomReserv = document.querySelector(".bottom-reserv");
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
-                if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.add("active");
+                if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.toggle("active");
                 if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
             }
             const iconMenu = document.querySelector(".header__burger");
