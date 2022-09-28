@@ -5,9 +5,9 @@
 	<title>Поселки</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220927225552" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20220928185213" rel="stylesheet" />
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220927225552">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220928185213">
 	<!-- <link rel="shortcut icon" href="favicon.ico"> -->
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 
 <body>
 	<div class="wrapper wrapper_inner">
-		<header data-scroll="1" class="header-inner header ">
+		<header data-scroll="1" class="header-inner header-inner_catalog header ">
 			<div class="header-inner__container">
 				<button type="button" class="icon-menu"><span></span></button>
 				<div class="header-inner__left">
@@ -127,7 +127,7 @@
 			</div>
 
 		</header>
-		<main class="page page_inner">
+		<main class="page page_inner-catalog">
 			<div class="page__header">
 				<div class="page__container">
 					<nav class="page__breadcrumbs breadcrumbs">
@@ -735,13 +735,15 @@
 
 	<div id="townships-filter" aria-hidden="true" class="popup townships-filter__popap">
 		<div class="popup__wrapper townships-filter__wrapper">
+			<div class="townships-filter__header">
+				<div class="townships-filter__title">Фильтры</div>
+				<button data-close type="button" class="popup__close townships-filter__close">
+					<img src="img/icons/close.svg" alt="">
+				</button>
+			</div>
 			<div class="popup__content townships-filter__content">
-				<div class="townships-filter__header">
-					<div class="townships-filter__title">Фильтры</div>
-					<button data-close type="button" class="popup__close townships-filter__close">
-						<img src="img/icons/close.svg" alt="">
-					</button>
-				</div>
+
+
 
 				<div class="popup__text townships-filter__body">
 
@@ -860,11 +862,12 @@
 						</div>
 					</div>
 				</div>
-				<div data-da=".townships-filter__wrapper,991.98,1" class="townships-filter__bottom">
-					<button type="button" class="townships-filter__reset">Сбросить <span> все фильтры</span></button>
-					<button data-close type="button" class="townships-filter__showmore">Показать &nbsp <span>127</span> &nbsp
-						участков</button>
-				</div>
+
+			</div>
+			<div class="townships-filter__bottom">
+				<button type="button" class="townships-filter__reset">Сбросить <span> все фильтры</span></button>
+				<button data-close type="button" class="townships-filter__showmore">Показать &nbsp <span>127</span> &nbsp
+					участков</button>
 			</div>
 		</div>
 	</div>
@@ -975,7 +978,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220927225552"></script>
+	<script src="js/app.min.js?_v=20220928185213"></script>
 </body>
 
 </html>
