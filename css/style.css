@@ -964,6 +964,7 @@ body::after {
       align-self: stretch;
   background: #FFFFFF;
   border-radius: 15px 15px 0 0;
+  z-index: 2;
 }
 
 .townships-filter__header::before {
@@ -7457,12 +7458,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    border-radius: 15px 15px 0 0;
   }
 
   .townships-filter__body {
     margin-bottom: 3.125rem;
-    margin-top: 3.75rem;
   }
 
   .townships-filter__bottom {
@@ -8095,10 +8094,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     border: 0.5px solid #8F8F8F;
     border-radius: 50%;
     z-index: 2;
-  }
-
-  .townships-filter__body {
-    margin-top: 2.5rem;
   }
 
   .townships-filter__range {
