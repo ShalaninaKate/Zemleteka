@@ -2,7 +2,7 @@
 <html lang="ru">
 
 <head>
-	<title>Новости</title>
+	<title>Контакты</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<link href="https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,800,900&display=swap&_v=20221001211157" rel="stylesheet" />
@@ -14,8 +14,8 @@
 </head>
 
 <body>
-	<div class="wrapper wrapper_news">
-		<header data-scroll="1" class="header-inner header-inner_catalog header-inner_news header ">
+	<div class="wrapper wrapper_inner">
+		<header data-scroll="1" class="header-inner header-inner_catalog header ">
 			<div class="header-inner__container">
 				<button type="button" class="icon-menu"><span></span></button>
 				<div class="header-inner__left">
@@ -103,9 +103,9 @@
 					<ul class="menu__list">
 						<li class="menu__item"><a href="" class="menu__link menu__link_burger _icon-arrow">Главная</a></li>
 						<li class="menu__item"><a href="" class="menu__link _icon-arrow">Поселки</a></li>
-						<li class="menu__item"><a href="" class="menu__link _icon-arrow _active">Новости</a></li>
+						<li class="menu__item"><a href="" class="menu__link _icon-arrow">Новости</a></li>
 						<li class="menu__item"><a href="" class="menu__link _icon-arrow">О компании</a></li>
-						<li class="menu__item"><a href="" class="menu__link _icon-arrow">Контакты</a></li>
+						<li class="menu__item"><a href="" class="menu__link _icon-arrow _active">Контакты</a></li>
 						<li class="menu__item"><a href="" class="menu__link menu__link_burger _icon-arrow">Информация</a></li>
 					</ul>
 					<div class="menu__burger">
@@ -127,7 +127,7 @@
 			</div>
 
 		</header>
-		<main class="page page_inner-news">
+		<main class="page page_inner-catalog">
 			<div class="page__header">
 				<div class="page__container">
 					<nav class="page__breadcrumbs breadcrumbs">
@@ -136,254 +136,180 @@
 								<a href="" class="breadcrumbs__link">Главная</a>
 							</li>
 							<li class="breadcrumbs__item">
-								<a href="" class="breadcrumbs__link">Новости</a>
+								<a href="" class="breadcrumbs__link">Контакты</a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 			</div>
-			<div class="news-page">
-				<div class="news-page__container">
-					<div class="news-page__header">
-						<h3 class="news-page__title">Новости <span>поселков</span></h3>
-						<div class="news-page__select">
-							<select name="form[]" data-class-modif="form">
-								<option value="1" selected>Все поселки</option>
-								<option value="2">д.п. Парус</option>
-								<option value="3">д.п. Таширово улица Молодёжная</option>
-								<option value="4">д.п. Загородный 3</option>
-								<option value="5">д.п. Загородный 2</option>
-								<option value="6">д.п. Облака</option>
-								<option value="7">д.п. Луговое</option>
-							</select>
-						</div>
+			<div class="contacts">
+				<div class="contacts__container">
+					<h3 class="contacts__title">Контакты</h3>
+					<div class="contacts__body">
+						<div class="contacts__column">
+							<div class="contacts__items">
+								<div class="contacts__item">
+									<div class="contacts__item-title">Продажа участков</div>
+									<div class="contacts__item-seporation"></div>
+									<div class="contacts__item-text">Информация и консультации по покупке земельных участков.
+										Звонки принимаются ежедневно с 9:00 до 18:00.</div>
+									<div class="contacts__item-info">
+										<a href="tel:89150783143" class="contacts__item-tel">8 (915) 078-31-43</a>
+									</div>
+								</div>
 
+								<div class="contacts__item">
+									<div class="contacts__item-title">Служба эксплуатации</div>
+									<div class="contacts__item-seporation"></div>
+									<div class="contacts__item-text">Вопросы, жалобы и предложения связанные с эксплуатацией
+										поселков,
+										охраной, строительством дополнительной инфраструктуры, расчетами по электричеству и
+										коммунальным
+										платежам. понедельник – пятница 09:00 – 18:00</div>
+									<div class="contacts__item-info">
+										<a href="tel:89150783143" class="contacts__item-tel">8 (915) 078-31-43</a>
+										<a href="mailto:service@zemleteka.ru" class="contacts__item-mail"><span>e-mail:</span>service@zemleteka.ru</a>
+									</div>
+								</div>
+								<div class="contacts__item">
+									<div class="contacts__item-title">Основной офис</div>
+									<div class="contacts__item-seporation"></div>
+									<div class="contacts__item-office item-office">
+										<div class="item-office__row">
+											<div class="item-office__label">
+												<div class="item-office__label-text">адрес:</div>
+												<span></span>
+											</div>
+
+											<div class="item-office__text">г. Москва, Рублёвское шоссе, д. 26 корп.
+												1а</div>
+										</div>
+										<div class="item-office__row">
+											<div class="item-office__label">
+												<div class="item-office__label-text">e-mail: </div>
+												<span></span>
+											</div>
+											<a href="mailto:service@zemleteka.ru" class="item-office__text">service@zemleteka.ru</a>
+										</div>
+										<div class="item-office__row">
+											<div class="item-office__label">
+												<div class="item-office__label-text">график работы:</div>
+												<span></span>
+											</div>
+
+											<div class="item-office__text">понедельник–пятница, 09:00–18:00</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="contacts__column">
+							<div data-da=".contacts__items,991.98,1" class="contacts__item contacts__item_show">
+								<div class="contacts__item-title">Показ участков</div>
+								<div class="contacts__item-seporation contacts__item-seporation_show"></div>
+								<div class="contacts__item-show show-plots">
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body show-plots__item-body_1">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body_1,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body_1,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body show-plots__item-body_2">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body_2,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body_2,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body show-plots__item-body_3">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body_3,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body_3,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body show-plots__item-body_4">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body_4,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body_4,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+									<div class="show-plots__item">
+										<div class="show-plots__item-image">
+											<picture><source srcset="img/contacts/01.webp" type="image/webp"><img src="img/contacts/01.jpg" alt=""></picture>
+										</div>
+										<div class="show-plots__item-body show-plots__item-body_5">
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-location">Лесные пруды, Шапкино Парк</div>
+												<a data-da=".show-plots__item-body_5,600,3" href="" class="show-plots__item-link">Записаться на показ</a>
+											</div>
+											<div class="show-plots__item-row">
+												<div class="show-plots__item-fio">Иван Иванович Морозов
+												</div>
+												<a data-da=".show-plots__item-body_5,600,2" href="tel:89150783143" class="show-plots__item-tel">8 (915) 078-31-43</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="news__items news__items_page">
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/01.webp" type="image/webp"><img src="img/news/01.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column ">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/02.webp" type="image/webp"><img src="img/news/02.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/03.webp" type="image/webp"><img src="img/news/03.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/04.webp" type="image/webp"><img src="img/news/04.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/01.webp" type="image/webp"><img src="img/news/01.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column ">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/02.webp" type="image/webp"><img src="img/news/02.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/03.webp" type="image/webp"><img src="img/news/03.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/04.webp" type="image/webp"><img src="img/news/04.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/01.webp" type="image/webp"><img src="img/news/01.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column ">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/02.webp" type="image/webp"><img src="img/news/02.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/03.webp" type="image/webp"><img src="img/news/03.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/04.webp" type="image/webp"><img src="img/news/04.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/01.webp" type="image/webp"><img src="img/news/01.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column ">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/02.webp" type="image/webp"><img src="img/news/02.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/03.webp" type="image/webp"><img src="img/news/03.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
-						<article class="news__column">
-							<a href="" class="news__item item-news">
-								<div class="item-news__image-ibg">
-									<picture><source srcset="img/news/04.webp" type="image/webp"><img src="img/news/04.jpg" alt=""></picture>
-								</div>
-								<div class="item-news__body">
-									<div class="item-news__date">23.04.2022</div>
-									<h4 class="item-news__title">п. Дороховы дачи </h4>
-									<div class="item-news__text">
-										<p>В поселке провели очередной плановый покос травы.</p>
-									</div>
-								</div>
-							</a>
-						</article>
+					<div class="contacts__map">
+						<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3e78fc1e7568ff56a5d7584dd64628e24b0e956213f858e61b09ec0859a39fdc&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
 					</div>
 				</div>
 			</div>
