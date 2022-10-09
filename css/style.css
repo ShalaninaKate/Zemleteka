@@ -9526,6 +9526,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin: 0;
   }
 
+  .plot__bottom.no-fixed-bottom-container {
+    position: relative;
+  }
+
   .plot__bottom-price1 {
     font-size: 0.875rem;
   }
@@ -9554,6 +9558,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .bottom-reserv.no-fixed-bottom-container {
     position: relative;
+    bottom: 0;
   }
 
   .bottom-reserv__title {
