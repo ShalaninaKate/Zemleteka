@@ -5615,7 +5615,6 @@
             const inputs = [ input0, input1 ];
             rangeSlider.noUiSlider.on("update", (function(values, handle) {
                 inputs[handle].value = values[handle];
-                update_count_filter_lots();
             }));
             const setRangeSlider = (i, value) => {
                 let arr = [ null, null ];
@@ -5627,7 +5626,6 @@
                 el.addEventListener("change", (e => {
                     console.log(index);
                     setRangeSlider(index, e.currentTarget.value);
-                    update_count_filter_lots();
                 }));
             }));
         }
@@ -5655,7 +5653,6 @@
             const inputsSquare = [ inputSquare0, inputSquare1 ];
             rangeSliderSquare.noUiSlider.on("update", (function(values, handle) {
                 inputsSquare[handle].value = values[handle];
-                update_count_filter_lots();
             }));
             const setRangeSliderSquare = (i, value) => {
                 let arr = [ null, null ];
@@ -5667,7 +5664,6 @@
                 el.addEventListener("change", (e => {
                     console.log(index);
                     setRangeSliderSquare(index, e.currentTarget.value);
-                    update_count_filter_lots();
                 }));
             }));
         }
@@ -6352,7 +6348,7 @@
                 } catch (e) {}
             }));
         }
-        function utils_nextTick(callback, delay) {
+        function nextTick(callback, delay) {
             if (void 0 === delay) delay = 0;
             return setTimeout(callback, delay);
         }
@@ -7489,13 +7485,13 @@
                 if (params.centeredSlides) if (slideToIndex < swiper.loopedSlides - slidesPerView / 2 || slideToIndex > swiper.slides.length - swiper.loopedSlides + slidesPerView / 2) {
                     swiper.loopFix();
                     slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
-                    utils_nextTick((() => {
+                    nextTick((() => {
                         swiper.slideTo(slideToIndex);
                     }));
                 } else swiper.slideTo(slideToIndex); else if (slideToIndex > swiper.slides.length - slidesPerView) {
                     swiper.loopFix();
                     slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
-                    utils_nextTick((() => {
+                    nextTick((() => {
                         swiper.slideTo(slideToIndex);
                     }));
                 } else swiper.slideTo(slideToIndex);
@@ -7814,7 +7810,7 @@
                 if (timeDiff < 300 && touchEndTime - data.lastClickTime < 300) swiper.emit("doubleTap doubleClick", e);
             }
             data.lastClickTime = utils_now();
-            utils_nextTick((() => {
+            nextTick((() => {
                 if (!swiper.destroyed) swiper.allowClick = true;
             }));
             if (!data.isTouched || !data.isMoved || !swiper.swipeDirection || 0 === touches.diff || data.currentTranslate === data.startTranslate) {
@@ -8905,11 +8901,11 @@
                                 const snapToThreshold = delta > 0 ? .8 : .2;
                                 lastEventBeforeSnap = newEvent;
                                 recentWheelEvents.splice(0);
-                                timeout = utils_nextTick((() => {
+                                timeout = nextTick((() => {
                                     swiper.slideToClosest(swiper.params.speed, true, void 0, snapToThreshold);
                                 }), 0);
                             }
-                            if (!timeout) timeout = utils_nextTick((() => {
+                            if (!timeout) timeout = nextTick((() => {
                                 const snapToThreshold = .5;
                                 lastEventBeforeSnap = newEvent;
                                 recentWheelEvents.splice(0);
@@ -9523,7 +9519,7 @@
                 }
                 if (params.hide) {
                     clearTimeout(dragTimeout);
-                    dragTimeout = utils_nextTick((() => {
+                    dragTimeout = nextTick((() => {
                         $el.css("opacity", 0);
                         $el.transition(400);
                     }), 1e3);
@@ -9717,6 +9713,128 @@
                 setTransition(duration);
             }));
         }
+        function Controller(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                controller: {
+                    control: void 0,
+                    inverse: false,
+                    by: "slide"
+                }
+            });
+            swiper.controller = {
+                control: void 0
+            };
+            function LinearSpline(x, y) {
+                const binarySearch = function search() {
+                    let maxIndex;
+                    let minIndex;
+                    let guess;
+                    return (array, val) => {
+                        minIndex = -1;
+                        maxIndex = array.length;
+                        while (maxIndex - minIndex > 1) {
+                            guess = maxIndex + minIndex >> 1;
+                            if (array[guess] <= val) minIndex = guess; else maxIndex = guess;
+                        }
+                        return maxIndex;
+                    };
+                }();
+                this.x = x;
+                this.y = y;
+                this.lastIndex = x.length - 1;
+                let i1;
+                let i3;
+                this.interpolate = function interpolate(x2) {
+                    if (!x2) return 0;
+                    i3 = binarySearch(this.x, x2);
+                    i1 = i3 - 1;
+                    return (x2 - this.x[i1]) * (this.y[i3] - this.y[i1]) / (this.x[i3] - this.x[i1]) + this.y[i1];
+                };
+                return this;
+            }
+            function getInterpolateFunction(c) {
+                if (!swiper.controller.spline) swiper.controller.spline = swiper.params.loop ? new LinearSpline(swiper.slidesGrid, c.slidesGrid) : new LinearSpline(swiper.snapGrid, c.snapGrid);
+            }
+            function setTranslate(_t, byController) {
+                const controlled = swiper.controller.control;
+                let multiplier;
+                let controlledTranslate;
+                const Swiper = swiper.constructor;
+                function setControlledTranslate(c) {
+                    const translate = swiper.rtlTranslate ? -swiper.translate : swiper.translate;
+                    if ("slide" === swiper.params.controller.by) {
+                        getInterpolateFunction(c);
+                        controlledTranslate = -swiper.controller.spline.interpolate(-translate);
+                    }
+                    if (!controlledTranslate || "container" === swiper.params.controller.by) {
+                        multiplier = (c.maxTranslate() - c.minTranslate()) / (swiper.maxTranslate() - swiper.minTranslate());
+                        controlledTranslate = (translate - swiper.minTranslate()) * multiplier + c.minTranslate();
+                    }
+                    if (swiper.params.controller.inverse) controlledTranslate = c.maxTranslate() - controlledTranslate;
+                    c.updateProgress(controlledTranslate);
+                    c.setTranslate(controlledTranslate, swiper);
+                    c.updateActiveIndex();
+                    c.updateSlidesClasses();
+                }
+                if (Array.isArray(controlled)) {
+                    for (let i = 0; i < controlled.length; i += 1) if (controlled[i] !== byController && controlled[i] instanceof Swiper) setControlledTranslate(controlled[i]);
+                } else if (controlled instanceof Swiper && byController !== controlled) setControlledTranslate(controlled);
+            }
+            function setTransition(duration, byController) {
+                const Swiper = swiper.constructor;
+                const controlled = swiper.controller.control;
+                let i;
+                function setControlledTransition(c) {
+                    c.setTransition(duration, swiper);
+                    if (0 !== duration) {
+                        c.transitionStart();
+                        if (c.params.autoHeight) nextTick((() => {
+                            c.updateAutoHeight();
+                        }));
+                        c.$wrapperEl.transitionEnd((() => {
+                            if (!controlled) return;
+                            if (c.params.loop && "slide" === swiper.params.controller.by) c.loopFix();
+                            c.transitionEnd();
+                        }));
+                    }
+                }
+                if (Array.isArray(controlled)) {
+                    for (i = 0; i < controlled.length; i += 1) if (controlled[i] !== byController && controlled[i] instanceof Swiper) setControlledTransition(controlled[i]);
+                } else if (controlled instanceof Swiper && byController !== controlled) setControlledTransition(controlled);
+            }
+            function removeSpline() {
+                if (!swiper.controller.control) return;
+                if (swiper.controller.spline) {
+                    swiper.controller.spline = void 0;
+                    delete swiper.controller.spline;
+                }
+            }
+            on("beforeInit", (() => {
+                swiper.controller.control = swiper.params.controller.control;
+            }));
+            on("update", (() => {
+                removeSpline();
+            }));
+            on("resize", (() => {
+                removeSpline();
+            }));
+            on("observerUpdate", (() => {
+                removeSpline();
+            }));
+            on("setTranslate", ((_s, translate, byController) => {
+                if (!swiper.controller.control) return;
+                swiper.controller.setTranslate(translate, byController);
+            }));
+            on("setTransition", ((_s, duration, byController) => {
+                if (!swiper.controller.control) return;
+                swiper.controller.setTransition(duration, byController);
+            }));
+            Object.assign(swiper.controller, {
+                setTranslate,
+                setTransition
+            });
+        }
         function Autoplay(_ref) {
             let {swiper, extendParams, on, emit} = _ref;
             let timeout;
@@ -9745,7 +9863,7 @@
                 let delay = swiper.params.autoplay.delay;
                 if ($activeSlideEl.attr("data-swiper-autoplay")) delay = $activeSlideEl.attr("data-swiper-autoplay") || swiper.params.autoplay.delay;
                 clearTimeout(timeout);
-                timeout = utils_nextTick((() => {
+                timeout = nextTick((() => {
                     let autoplayResult;
                     if (swiper.params.autoplay.reverseDirection) if (swiper.params.loop) {
                         swiper.loopFix();
@@ -9994,27 +10112,8 @@
             });
         }
         function initSliders() {
-            if (document.querySelector(".slider-main__slider")) new core(".slider-main__slider", {
-                modules: [ Navigation, Pagination, Autoplay, Parallax ],
-                observer: true,
-                observeParents: true,
-                slidesPerView: 1,
-                spaceBetween: 0,
-                autoHeight: true,
-                speed: 2500,
-                parallax: true,
-                loop: true,
-                effect: "fade",
-                pagination: {
-                    el: ".slider-main__dotts",
-                    clickable: true
-                },
-                navigation: {
-                    prevEl: ".swiper-button-prev",
-                    nextEl: ".swiper-button-next"
-                },
-                on: {}
-            });
+            if (document.querySelector(".slider-main__slider")) ;
+            if (document.querySelector(".main-content__slider")) ;
             if (document.querySelector(".free-plot__slider")) new core(".free-plot__slider", {
                 modules: [ Navigation, Keyboard, Mousewheel ],
                 observer: true,
@@ -10236,6 +10335,63 @@
                 swiper.slideTo(tmp1, 800);
             }));
         }));
+        let slider11 = new core(".slider-main__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller ],
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            speed: 2e3,
+            parallax: true,
+            loop: true,
+            effect: "fade",
+            pagination: {
+                el: ".slider-main__dotts",
+                clickable: true
+            },
+            navigation: {
+                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next"
+            },
+            breakpoints: {
+                320: {
+                    autoHeight: true
+                },
+                500: {},
+                768: {},
+                992: {},
+                1400: {}
+            },
+            on: {}
+        });
+        let slider22 = new core(".main-content__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade ],
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoHeight: true,
+            speed: 2e3,
+            loop: true,
+            effect: "fade",
+            fadeEffect: {
+                crossFade: true
+            },
+            breakpoints: {
+                320: {
+                    autoHeight: false
+                },
+                500: {},
+                768: {
+                    autoHeight: true
+                },
+                992: {},
+                1400: {}
+            },
+            on: {}
+        });
+        slider11.controller.control = slider22;
+        slider22.controller.control = slider11;
         __webpack_require__(2352);
         __webpack_require__(3542);
         var can_use_dom = __webpack_require__(1807);
@@ -13652,6 +13808,8 @@ PERFORMANCE OF THIS SOFTWARE.
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
                 if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.toggle("active");
                 if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
+                document.querySelector(".about-township__text");
+                document.querySelector(".about-township__more-text");
                 const faq = document.querySelectorAll(".faq__item-text");
                 if (faq) if (targetElement.closest(".faq__item")) targetElement.closest(".faq__item").classList.toggle("active");
             }
