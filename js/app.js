@@ -13788,8 +13788,8 @@ PERFORMANCE OF THIS SOFTWARE.
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
                 if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.toggle("active");
                 if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
-                const aboutTownshipText = document.querySelector(".about-township__text");
-                if (aboutTownshipText) if (targetElement.classList.contains("about-township__more-text")) aboutTownshipText.classList.toggle("more");
+                document.querySelector(".about-township__text");
+                document.querySelector(".about-township__more-text");
                 const faq = document.querySelectorAll(".faq__item-text");
                 if (faq) if (targetElement.closest(".faq__item")) targetElement.closest(".faq__item").classList.toggle("active");
             }

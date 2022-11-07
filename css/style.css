@@ -232,10 +232,6 @@ h6 {
   font-size: inherit;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 .lock body {
   overflow: hidden;
   -ms-touch-action: none;
@@ -249,6 +245,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -267,6 +264,10 @@ body {
 
 .wrapper_inner {
   background-color: #ffffff;
+}
+
+.wrapper_visible {
+  overflow: visible;
 }
 
 .wrapper_news {
@@ -4805,8 +4806,6 @@ body::after {
   line-height: 1.5;
   font-size: 1.0625rem;
   text-align: justify;
-  height: 21.25rem;
-  overflow: hidden;
   margin-bottom: 1.5rem;
 }
 
@@ -4838,6 +4837,10 @@ body::after {
 
 .about-township__more-arrow:before {
   font-size: 0.75rem;
+}
+
+.township__filtrs {
+  overflow: hidden;
 }
 
 .filtrs-township__top {
@@ -5368,6 +5371,10 @@ body::after {
 
 .township__news {
   background: #F5F5F5;
+}
+
+.township__free-plot {
+  overflow: hidden;
 }
 
 .free-plot__decor_township {
