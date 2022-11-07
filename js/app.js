@@ -5281,6 +5281,7 @@
                     classes: {
                         popup: "popup",
                         popupWrapper: "popup__wrapper",
+                        popupWrapperInner: "townships-filter__wrapper",
                         popupContent: "popup__content",
                         popupActive: "popup_show",
                         bodyActive: "popup-show"
@@ -5359,7 +5360,7 @@
                         return;
                     }
                     const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
-                    if (buttonClose && this.isOpen) {
+                    if (buttonClose || !e.target.closest(`.${this.options.classes.popupWrapperInner}`) && !e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen) {
                         e.preventDefault();
                         this.close();
                         return;
@@ -5413,10 +5414,6 @@
                             }
                             this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
                         }
-                        if (this.options.hashSettings.location) {
-                            this._getHash();
-                            this._setHash();
-                        }
                         this.options.on.beforeOpen(this);
                         document.dispatchEvent(new CustomEvent("beforePopupOpen", {
                             detail: {
@@ -5461,11 +5458,6 @@
                     !this.bodyLock ? bodyUnlock() : null;
                     this.isOpen = false;
                 }
-                this._removeHash();
-                if (this._selectorOpen) {
-                    this.lastClosed.selector = this.previousOpen.selector;
-                    this.lastClosed.element = this.previousOpen.element;
-                }
                 this.options.on.afterClose(this);
                 document.dispatchEvent(new CustomEvent("afterPopupClose", {
                     detail: {
@@ -5477,19 +5469,10 @@
                 }), 50);
                 this.popupLogging(`Закрыл попап`);
             }
-            _getHash() {
-                if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
-            }
             _openToHash() {
                 let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
                 const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
                 if (buttons && classInHash) this.open(classInHash);
-            }
-            _setHash() {
-                history.pushState("", "", this.hash);
-            }
-            _removeHash() {
-                history.pushState("", "", window.location.href.split("#")[0]);
             }
             _focusCatch(e) {
                 const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
@@ -5608,15 +5591,19 @@
         };
         var nouislider = __webpack_require__(4211);
         const rangeSlider = document.getElementById("range-slider-price");
+        var min_price = 5e5;
+        var max_price = 15e5;
+        if ("undefined" !== typeof Number(rangeSlider.dataset.min) && null !== Number(rangeSlider.dataset.min) && !isNaN(Number(rangeSlider.dataset.min))) min_price = Number(rangeSlider.dataset.min);
+        if ("undefined" !== typeof Number(rangeSlider.dataset.max) && null !== Number(rangeSlider.dataset.max) && !isNaN(Number(rangeSlider.dataset.max))) max_price = Number(rangeSlider.dataset.max);
+        console.log(min_price, max_price);
         if (rangeSlider) {
             nouislider.create(rangeSlider, {
-                start: [ 9e4, 5e5 ],
+                start: [ min_price, max_price ],
                 connect: true,
-                step: 1e4,
+                step: 2e5,
                 range: {
-                    min: [ 9e4 ],
-                    "80%": [ 2e6, 3e4 ],
-                    max: 5e6
+                    min: [ min_price ],
+                    max: [ max_price ]
                 },
                 format: wNumb({
                     thousand: " ",
@@ -5643,14 +5630,18 @@
             }));
         }
         const rangeSliderSquare = document.getElementById("range-slider-square");
+        var min_price1 = 5.06;
+        var max_price1 = 20.04;
+        if ("undefined" !== typeof Number(rangeSliderSquare.dataset.min) && null !== Number(rangeSliderSquare.dataset.min) && !isNaN(Number(rangeSliderSquare.dataset.min))) min_price1 = Number(rangeSliderSquare.dataset.min);
+        if ("undefined" !== typeof Number(rangeSliderSquare.dataset.max) && null !== Number(rangeSliderSquare.dataset.max) && !isNaN(Number(rangeSliderSquare.dataset.max))) max_price1 = Number(rangeSliderSquare.dataset.max);
         if (rangeSliderSquare) {
             nouislider.create(rangeSliderSquare, {
-                start: [ 5.56, 12.22 ],
+                start: [ min_price1, max_price1 ],
                 connect: true,
-                step: .01,
+                step: 1,
                 range: {
-                    min: 4,
-                    max: 50
+                    min: min_price1,
+                    max: max_price1
                 },
                 format: wNumb({
                     mark: ".",
@@ -6357,7 +6348,7 @@
                 } catch (e) {}
             }));
         }
-        function utils_nextTick(callback, delay) {
+        function nextTick(callback, delay) {
             if (void 0 === delay) delay = 0;
             return setTimeout(callback, delay);
         }
@@ -7494,13 +7485,13 @@
                 if (params.centeredSlides) if (slideToIndex < swiper.loopedSlides - slidesPerView / 2 || slideToIndex > swiper.slides.length - swiper.loopedSlides + slidesPerView / 2) {
                     swiper.loopFix();
                     slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
-                    utils_nextTick((() => {
+                    nextTick((() => {
                         swiper.slideTo(slideToIndex);
                     }));
                 } else swiper.slideTo(slideToIndex); else if (slideToIndex > swiper.slides.length - slidesPerView) {
                     swiper.loopFix();
                     slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
-                    utils_nextTick((() => {
+                    nextTick((() => {
                         swiper.slideTo(slideToIndex);
                     }));
                 } else swiper.slideTo(slideToIndex);
@@ -7819,7 +7810,7 @@
                 if (timeDiff < 300 && touchEndTime - data.lastClickTime < 300) swiper.emit("doubleTap doubleClick", e);
             }
             data.lastClickTime = utils_now();
-            utils_nextTick((() => {
+            nextTick((() => {
                 if (!swiper.destroyed) swiper.allowClick = true;
             }));
             if (!data.isTouched || !data.isMoved || !swiper.swipeDirection || 0 === touches.diff || data.currentTranslate === data.startTranslate) {
@@ -8910,11 +8901,11 @@
                                 const snapToThreshold = delta > 0 ? .8 : .2;
                                 lastEventBeforeSnap = newEvent;
                                 recentWheelEvents.splice(0);
-                                timeout = utils_nextTick((() => {
+                                timeout = nextTick((() => {
                                     swiper.slideToClosest(swiper.params.speed, true, void 0, snapToThreshold);
                                 }), 0);
                             }
-                            if (!timeout) timeout = utils_nextTick((() => {
+                            if (!timeout) timeout = nextTick((() => {
                                 const snapToThreshold = .5;
                                 lastEventBeforeSnap = newEvent;
                                 recentWheelEvents.splice(0);
@@ -9528,7 +9519,7 @@
                 }
                 if (params.hide) {
                     clearTimeout(dragTimeout);
-                    dragTimeout = utils_nextTick((() => {
+                    dragTimeout = nextTick((() => {
                         $el.css("opacity", 0);
                         $el.transition(400);
                     }), 1e3);
@@ -9643,6 +9634,207 @@
                 destroy
             });
         }
+        function Parallax(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                parallax: {
+                    enabled: false
+                }
+            });
+            const setTransform = (el, progress) => {
+                const {rtl} = swiper;
+                const $el = dom(el);
+                const rtlFactor = rtl ? -1 : 1;
+                const p = $el.attr("data-swiper-parallax") || "0";
+                let x = $el.attr("data-swiper-parallax-x");
+                let y = $el.attr("data-swiper-parallax-y");
+                const scale = $el.attr("data-swiper-parallax-scale");
+                const opacity = $el.attr("data-swiper-parallax-opacity");
+                if (x || y) {
+                    x = x || "0";
+                    y = y || "0";
+                } else if (swiper.isHorizontal()) {
+                    x = p;
+                    y = "0";
+                } else {
+                    y = p;
+                    x = "0";
+                }
+                if (x.indexOf("%") >= 0) x = `${parseInt(x, 10) * progress * rtlFactor}%`; else x = `${x * progress * rtlFactor}px`;
+                if (y.indexOf("%") >= 0) y = `${parseInt(y, 10) * progress}%`; else y = `${y * progress}px`;
+                if ("undefined" !== typeof opacity && null !== opacity) {
+                    const currentOpacity = opacity - (opacity - 1) * (1 - Math.abs(progress));
+                    $el[0].style.opacity = currentOpacity;
+                }
+                if ("undefined" === typeof scale || null === scale) $el.transform(`translate3d(${x}, ${y}, 0px)`); else {
+                    const currentScale = scale - (scale - 1) * (1 - Math.abs(progress));
+                    $el.transform(`translate3d(${x}, ${y}, 0px) scale(${currentScale})`);
+                }
+            };
+            const setTranslate = () => {
+                const {$el, slides, progress, snapGrid} = swiper;
+                $el.children("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]").each((el => {
+                    setTransform(el, progress);
+                }));
+                slides.each(((slideEl, slideIndex) => {
+                    let slideProgress = slideEl.progress;
+                    if (swiper.params.slidesPerGroup > 1 && "auto" !== swiper.params.slidesPerView) slideProgress += Math.ceil(slideIndex / 2) - progress * (snapGrid.length - 1);
+                    slideProgress = Math.min(Math.max(slideProgress, -1), 1);
+                    dom(slideEl).find("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]").each((el => {
+                        setTransform(el, slideProgress);
+                    }));
+                }));
+            };
+            const setTransition = function(duration) {
+                if (void 0 === duration) duration = swiper.params.speed;
+                const {$el} = swiper;
+                $el.find("[data-swiper-parallax], [data-swiper-parallax-x], [data-swiper-parallax-y], [data-swiper-parallax-opacity], [data-swiper-parallax-scale]").each((parallaxEl => {
+                    const $parallaxEl = dom(parallaxEl);
+                    let parallaxDuration = parseInt($parallaxEl.attr("data-swiper-parallax-duration"), 10) || duration;
+                    if (0 === duration) parallaxDuration = 0;
+                    $parallaxEl.transition(parallaxDuration);
+                }));
+            };
+            on("beforeInit", (() => {
+                if (!swiper.params.parallax.enabled) return;
+                swiper.params.watchSlidesProgress = true;
+                swiper.originalParams.watchSlidesProgress = true;
+            }));
+            on("init", (() => {
+                if (!swiper.params.parallax.enabled) return;
+                setTranslate();
+            }));
+            on("setTranslate", (() => {
+                if (!swiper.params.parallax.enabled) return;
+                setTranslate();
+            }));
+            on("setTransition", ((_swiper, duration) => {
+                if (!swiper.params.parallax.enabled) return;
+                setTransition(duration);
+            }));
+        }
+        function Controller(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                controller: {
+                    control: void 0,
+                    inverse: false,
+                    by: "slide"
+                }
+            });
+            swiper.controller = {
+                control: void 0
+            };
+            function LinearSpline(x, y) {
+                const binarySearch = function search() {
+                    let maxIndex;
+                    let minIndex;
+                    let guess;
+                    return (array, val) => {
+                        minIndex = -1;
+                        maxIndex = array.length;
+                        while (maxIndex - minIndex > 1) {
+                            guess = maxIndex + minIndex >> 1;
+                            if (array[guess] <= val) minIndex = guess; else maxIndex = guess;
+                        }
+                        return maxIndex;
+                    };
+                }();
+                this.x = x;
+                this.y = y;
+                this.lastIndex = x.length - 1;
+                let i1;
+                let i3;
+                this.interpolate = function interpolate(x2) {
+                    if (!x2) return 0;
+                    i3 = binarySearch(this.x, x2);
+                    i1 = i3 - 1;
+                    return (x2 - this.x[i1]) * (this.y[i3] - this.y[i1]) / (this.x[i3] - this.x[i1]) + this.y[i1];
+                };
+                return this;
+            }
+            function getInterpolateFunction(c) {
+                if (!swiper.controller.spline) swiper.controller.spline = swiper.params.loop ? new LinearSpline(swiper.slidesGrid, c.slidesGrid) : new LinearSpline(swiper.snapGrid, c.snapGrid);
+            }
+            function setTranslate(_t, byController) {
+                const controlled = swiper.controller.control;
+                let multiplier;
+                let controlledTranslate;
+                const Swiper = swiper.constructor;
+                function setControlledTranslate(c) {
+                    const translate = swiper.rtlTranslate ? -swiper.translate : swiper.translate;
+                    if ("slide" === swiper.params.controller.by) {
+                        getInterpolateFunction(c);
+                        controlledTranslate = -swiper.controller.spline.interpolate(-translate);
+                    }
+                    if (!controlledTranslate || "container" === swiper.params.controller.by) {
+                        multiplier = (c.maxTranslate() - c.minTranslate()) / (swiper.maxTranslate() - swiper.minTranslate());
+                        controlledTranslate = (translate - swiper.minTranslate()) * multiplier + c.minTranslate();
+                    }
+                    if (swiper.params.controller.inverse) controlledTranslate = c.maxTranslate() - controlledTranslate;
+                    c.updateProgress(controlledTranslate);
+                    c.setTranslate(controlledTranslate, swiper);
+                    c.updateActiveIndex();
+                    c.updateSlidesClasses();
+                }
+                if (Array.isArray(controlled)) {
+                    for (let i = 0; i < controlled.length; i += 1) if (controlled[i] !== byController && controlled[i] instanceof Swiper) setControlledTranslate(controlled[i]);
+                } else if (controlled instanceof Swiper && byController !== controlled) setControlledTranslate(controlled);
+            }
+            function setTransition(duration, byController) {
+                const Swiper = swiper.constructor;
+                const controlled = swiper.controller.control;
+                let i;
+                function setControlledTransition(c) {
+                    c.setTransition(duration, swiper);
+                    if (0 !== duration) {
+                        c.transitionStart();
+                        if (c.params.autoHeight) nextTick((() => {
+                            c.updateAutoHeight();
+                        }));
+                        c.$wrapperEl.transitionEnd((() => {
+                            if (!controlled) return;
+                            if (c.params.loop && "slide" === swiper.params.controller.by) c.loopFix();
+                            c.transitionEnd();
+                        }));
+                    }
+                }
+                if (Array.isArray(controlled)) {
+                    for (i = 0; i < controlled.length; i += 1) if (controlled[i] !== byController && controlled[i] instanceof Swiper) setControlledTransition(controlled[i]);
+                } else if (controlled instanceof Swiper && byController !== controlled) setControlledTransition(controlled);
+            }
+            function removeSpline() {
+                if (!swiper.controller.control) return;
+                if (swiper.controller.spline) {
+                    swiper.controller.spline = void 0;
+                    delete swiper.controller.spline;
+                }
+            }
+            on("beforeInit", (() => {
+                swiper.controller.control = swiper.params.controller.control;
+            }));
+            on("update", (() => {
+                removeSpline();
+            }));
+            on("resize", (() => {
+                removeSpline();
+            }));
+            on("observerUpdate", (() => {
+                removeSpline();
+            }));
+            on("setTranslate", ((_s, translate, byController) => {
+                if (!swiper.controller.control) return;
+                swiper.controller.setTranslate(translate, byController);
+            }));
+            on("setTransition", ((_s, duration, byController) => {
+                if (!swiper.controller.control) return;
+                swiper.controller.setTransition(duration, byController);
+            }));
+            Object.assign(swiper.controller, {
+                setTranslate,
+                setTransition
+            });
+        }
         function Autoplay(_ref) {
             let {swiper, extendParams, on, emit} = _ref;
             let timeout;
@@ -9671,7 +9863,7 @@
                 let delay = swiper.params.autoplay.delay;
                 if ($activeSlideEl.attr("data-swiper-autoplay")) delay = $activeSlideEl.attr("data-swiper-autoplay") || swiper.params.autoplay.delay;
                 clearTimeout(timeout);
-                timeout = utils_nextTick((() => {
+                timeout = nextTick((() => {
                     let autoplayResult;
                     if (swiper.params.autoplay.reverseDirection) if (swiper.params.loop) {
                         swiper.loopFix();
@@ -9920,26 +10112,8 @@
             });
         }
         function initSliders() {
-            if (document.querySelector(".slider-main__slider")) new core(".slider-main__slider", {
-                modules: [ Navigation, Pagination, Autoplay ],
-                observer: true,
-                observeParents: true,
-                slidesPerView: 1,
-                spaceBetween: 0,
-                autoHeight: true,
-                speed: 2500,
-                loop: true,
-                effect: "fade",
-                pagination: {
-                    el: ".slider-main__dotts",
-                    clickable: true
-                },
-                navigation: {
-                    prevEl: ".swiper-button-prev",
-                    nextEl: ".swiper-button-next"
-                },
-                on: {}
-            });
+            if (document.querySelector(".slider-main__slider")) ;
+            if (document.querySelector(".main-content__slider")) ;
             if (document.querySelector(".free-plot__slider")) new core(".free-plot__slider", {
                 modules: [ Navigation, Keyboard, Mousewheel ],
                 observer: true,
@@ -10001,12 +10175,12 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1.8,
+                        slidesPerView: 2,
                         spaceBetween: 30,
                         slidesPerGroup: 1
                     },
-                    425: {
-                        slidesPerView: 2.1,
+                    500: {
+                        slidesPerView: "auto",
                         spaceBetween: 30
                     },
                     768: {
@@ -10014,7 +10188,8 @@
                         spaceBetween: 60
                     },
                     992: {
-                        slidesPerGroup: 3
+                        slidesPerGroup: 3,
+                        slidesPerView: "auto"
                     },
                     1400: {
                         slidesPerView: "auto",
@@ -10057,28 +10232,6 @@
                     992: {
                         spaceBetween: 16
                     }
-                },
-                on: {}
-            });
-            if (document.querySelector(".table__slider")) new core(".table__slider", {
-                modules: [ Navigation, Keyboard, Pagination, Mousewheel, Scrollbar ],
-                observer: true,
-                observeParents: true,
-                speed: 200,
-                watchOverflow: true,
-                grabCursor: true,
-                slidesPerView: "auto",
-                touchRatio: 1,
-                simulateTouch: true,
-                effect: "fade",
-                keyboard: {
-                    enabled: true,
-                    onlyInViewport: true,
-                    pageUpDown: true
-                },
-                scrollbar: {
-                    el: ".table-township__scrollbar.swiper-scrollbar",
-                    draggable: true
                 },
                 on: {}
             });
@@ -10131,6 +10284,94 @@
         window.addEventListener("load", (function(e) {
             initSliders();
         }));
+        const swiper = new core(".table__slider", {
+            modules: [ Navigation, Keyboard, Pagination, Mousewheel, Scrollbar ],
+            observer: true,
+            observeParents: true,
+            speed: 200,
+            watchOverflow: true,
+            grabCursor: true,
+            slidesPerView: "auto",
+            touchRatio: 1,
+            simulateTouch: true,
+            allowClick: true,
+            slideToClickedSlide: true,
+            effect: "fade",
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true,
+                pageUpDown: true
+            },
+            scrollbar: {
+                el: ".table-township__scrollbar.swiper-scrollbar",
+                draggable: true
+            },
+            on: {}
+        });
+        swiper.on("click", (function() {
+            var currentIndex = swiper.clickedIndex;
+            console.log(swiper.clickedIndex);
+            const qwe0 = document.querySelectorAll(".table__slide");
+            if (qwe0) qwe0.forEach(((choiceItem, index) => {
+                choiceItem.classList.remove("active");
+                if (currentIndex == index) {
+                    var lots_id = choiceItem.getAttribute("data-lotsid");
+                    choiceItem.classList.add("active");
+                    var polygons = document.querySelectorAll(".area_selected");
+                    polygons.forEach(((choiceItem1, index) => {
+                        choiceItem1.classList.remove("area_selected");
+                    }));
+                    var polygon = document.getElementById(lots_id);
+                    polygon.classList.add("area_selected");
+                    console.log(lots_id);
+                }
+            }));
+        }));
+        const qwe = document.querySelectorAll(".info-township__location-button");
+        if (qwe) qwe.forEach(((choiceItem, index) => {
+            console.log(index);
+            var tmp1 = index;
+            choiceItem.addEventListener("click", (function() {
+                swiper.slideTo(tmp1, 800);
+            }));
+        }));
+        let slider11 = new core(".slider-main__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller ],
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 0,
+            autoHeight: true,
+            speed: 2e3,
+            parallax: true,
+            loop: true,
+            effect: "fade",
+            pagination: {
+                el: ".slider-main__dotts",
+                clickable: true
+            },
+            navigation: {
+                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next"
+            },
+            on: {}
+        });
+        let slider22 = new core(".main-content__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade ],
+            observer: true,
+            observeParents: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            speed: 2e3,
+            loop: true,
+            effect: "fade",
+            fadeEffect: {
+                crossFade: true
+            },
+            on: {}
+        });
+        slider11.controller.control = slider22;
+        slider22.controller.control = slider11;
         __webpack_require__(2352);
         __webpack_require__(3542);
         var can_use_dom = __webpack_require__(1807);
@@ -13239,7 +13480,9 @@ PERFORMANCE OF THIS SOFTWARE.
                 galleyItems.push({
                     gallery,
                     galleryClass: lightgallery_es5(gallery, {
+                        addClass: "fixed-size",
                         licenseKey: "7EC452A9-0CFD441C-BD984C7C-17C8456E",
+                        subHtmlSelectorRelative: true,
                         speed: 500,
                         counter: false,
                         selector: "a",
@@ -13533,7 +13776,7 @@ PERFORMANCE OF THIS SOFTWARE.
                 if (formButton) if (!targetElement.closest(".form-button__wrapper") && !targetElement.classList.contains("bottom-township__button")) formButton.classList.remove("active");
                 const selectBody = document.querySelector(".select__body");
                 if (selectBody) {
-                    if (targetElement.classList.contains("_icon-arrow-down")) selectBody.classList.toggle("_select-open");
+                    if (targetElement.closest(".select__body")) selectBody.classList.toggle("_select-open");
                     if (!targetElement.closest(".select__body")) selectBody.classList.remove("_select-open");
                 }
                 const plotsFilter = document.querySelector(".townships-catalog__plots");
@@ -13545,6 +13788,10 @@ PERFORMANCE OF THIS SOFTWARE.
                 const bottomPlotReserv = document.querySelector(".plot__bottom-reservation");
                 if (targetElement.classList.contains("plot__bottom-reservation")) bottomReserv.classList.toggle("active");
                 if (bottomReserv) if (bottomReserv.classList.contains("active")) bottomPlotReserv.classList.add("_hide");
+                const aboutTownshipText = document.querySelector(".about-township__text");
+                if (aboutTownshipText) if (targetElement.classList.contains("about-township__more-text")) aboutTownshipText.classList.toggle("more");
+                const faq = document.querySelectorAll(".faq__item-text");
+                if (faq) if (targetElement.closest(".faq__item")) targetElement.closest(".faq__item").classList.toggle("active");
             }
             const iconMenu = document.querySelector(".header__burger");
             const menuTop = document.querySelector(".menu-top");
