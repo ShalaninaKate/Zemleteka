@@ -245,11 +245,11 @@ h6 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: hidden;
 }
 
 .wrapper > main {
@@ -264,10 +264,6 @@ h6 {
 
 .wrapper_inner {
   background-color: #ffffff;
-}
-
-.wrapper_visible {
-  overflow: visible;
 }
 
 .wrapper_news {
@@ -4017,8 +4013,7 @@ body::after {
 }
 
 .main-block__content-body {
-  position: relative;
-  z-index: 20;
+  pointer-events: none;
 }
 
 .main-block__subtitle {
@@ -4031,7 +4026,7 @@ body::after {
 .main-block__title {
   position: relative;
   z-index: 5;
-  margin-left: -3.75rem;
+  margin-left: -6.3125rem;
   font-weight: 900;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -4813,11 +4808,6 @@ body::after {
   margin-bottom: 10px;
 }
 
-.about-township__text.more {
-  height: 100%;
-  overflow: visible;
-}
-
 .about-township__more {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -4837,10 +4827,6 @@ body::after {
 
 .about-township__more-arrow:before {
   font-size: 0.75rem;
-}
-
-.township__filtrs {
-  overflow: hidden;
 }
 
 .filtrs-township__top {
@@ -5034,7 +5020,7 @@ body::after {
   line-height: 1.4;
 }
 
-.info-township__body {
+.info-township__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5120,11 +5106,6 @@ body::after {
 .info-township__right {
   width: 34%;
   position: relative;
-}
-
-.info-township__form {
-  position: sticky;
-  top: 20px;
 }
 
 .info-township__form-sold {
@@ -5371,10 +5352,6 @@ body::after {
 
 .township__news {
   background: #F5F5F5;
-}
-
-.township__free-plot {
-  overflow: hidden;
 }
 
 .free-plot__decor_township {
@@ -7748,17 +7725,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     background-color: #222222;
   }
 
-  .main-block__content-body {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-  }
-
   .main-block__more {
     -ms-flex-item-align: start;
         -ms-grid-row-align: start;
         align-self: start;
-    margin-bottom: 100px;
   }
 
   .advertising__text {
@@ -8138,11 +8108,11 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .main-block__title {
-    font-size: 5rem;
+    font-size: 8.75rem;
   }
 
   .main-block__title span {
-    font-size: 6.875rem;
+    font-size: 11.25rem;
   }
 
   .main-block__more {
@@ -8289,7 +8259,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 4.375rem;
   }
 
-  .info-township__body {
+  .info-township__container {
     gap: 3.3125rem;
   }
 
@@ -8383,11 +8353,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 @media (min-width: 64em) {
-  .main-block__more {
-    margin-left: 6.3125rem;
-  }
-
-  .main-content__slide {
+  .main-block__content {
     padding-left: 6.3125rem;
   }
 }
@@ -8594,7 +8560,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
   }
 
   .main-block__title span {
-    font-size: 3.125rem;
+    font-size: 4.625rem;
   }
 
   .main-block__more {
@@ -8741,7 +8707,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 2.8125rem;
   }
 
-  .info-township__body {
+  .info-township__container {
     gap: 0.0000000625rem;
   }
 
@@ -9149,6 +9115,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .footer__button {
     width: 100%;
+  }
+
+  .main-block__text {
+    display: none;
   }
 
   .map {
@@ -10647,10 +10617,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 0.3125rem;
   }
 
-  .main-block__text {
-    display: none;
-  }
-
   .main-block__more {
     padding: 1.25rem 0.625rem;
   }
@@ -11753,27 +11719,27 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     }
 }
 
-@supports (font-size: clamp( 1.5625rem , 0.3483719647rem  +  6.0706401766vw , 5rem )) {
+@supports (font-size: clamp( 1.5625rem , -0.9761313466rem  +  12.6931567329vw , 8.75rem )) {
     .main-block__title {
-      font-size: clamp( 1.5625rem , 0.3483719647rem  +  6.0706401766vw , 5rem );
+      font-size: clamp( 1.5625rem , -0.9761313466rem  +  12.6931567329vw , 8.75rem );
     }
 }
 
-@supports not (font-size: clamp( 1.5625rem , 0.3483719647rem  +  6.0706401766vw , 5rem )) {
+@supports not (font-size: clamp( 1.5625rem , -0.9761313466rem  +  12.6931567329vw , 8.75rem )) {
     .main-block__title {
-      font-size: calc(1.5625rem + 3.4375 * (100vw - 20rem) / 56.625);
+      font-size: calc(1.5625rem + 7.1875 * (100vw - 20rem) / 56.625);
     }
 }
 
-@supports (font-size: clamp( 3.125rem , 1.8004966887rem  +  6.6225165563vw , 6.875rem )) {
+@supports (font-size: clamp( 4.625rem , 2.2850441501rem  +  11.6997792494vw , 11.25rem )) {
     .main-block__title span {
-      font-size: clamp( 3.125rem , 1.8004966887rem  +  6.6225165563vw , 6.875rem );
+      font-size: clamp( 4.625rem , 2.2850441501rem  +  11.6997792494vw , 11.25rem );
     }
 }
 
-@supports not (font-size: clamp( 3.125rem , 1.8004966887rem  +  6.6225165563vw , 6.875rem )) {
+@supports not (font-size: clamp( 4.625rem , 2.2850441501rem  +  11.6997792494vw , 11.25rem )) {
     .main-block__title span {
-      font-size: calc(3.125rem + 3.75 * (100vw - 20rem) / 56.625);
+      font-size: calc(4.625rem + 6.625 * (100vw - 20rem) / 56.625);
     }
 }
 
@@ -12210,13 +12176,13 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 @supports (gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem )) {
-    .info-township__body {
+    .info-township__container {
       gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem );
     }
 }
 
 @supports not (gap: clamp( 0.0000000625rem , -1.1699778404rem  +  5.8498895143vw , 3.3125rem )) {
-    .info-township__body {
+    .info-township__container {
       gap: calc(0.0000000625rem + 3.3124999375 * (100vw - 20rem) / 56.625);
     }
 }
