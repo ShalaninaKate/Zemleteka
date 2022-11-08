@@ -10111,6 +10111,96 @@
                 })
             });
         }
+        function create_shadow_createShadow(params, $slideEl, side) {
+            const shadowClass = `swiper-slide-shadow${side ? `-${side}` : ""}`;
+            const $shadowContainer = params.transformEl ? $slideEl.find(params.transformEl) : $slideEl;
+            let $shadowEl = $shadowContainer.children(`.${shadowClass}`);
+            if (!$shadowEl.length) {
+                $shadowEl = dom(`<div class="swiper-slide-shadow${side ? `-${side}` : ""}"></div>`);
+                $shadowContainer.append($shadowEl);
+            }
+            return $shadowEl;
+        }
+        function EffectFlip(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                flipEffect: {
+                    slideShadows: true,
+                    limitRotation: true,
+                    transformEl: null
+                }
+            });
+            const createSlideShadows = ($slideEl, progress, params) => {
+                let shadowBefore = swiper.isHorizontal() ? $slideEl.find(".swiper-slide-shadow-left") : $slideEl.find(".swiper-slide-shadow-top");
+                let shadowAfter = swiper.isHorizontal() ? $slideEl.find(".swiper-slide-shadow-right") : $slideEl.find(".swiper-slide-shadow-bottom");
+                if (0 === shadowBefore.length) shadowBefore = create_shadow_createShadow(params, $slideEl, swiper.isHorizontal() ? "left" : "top");
+                if (0 === shadowAfter.length) shadowAfter = create_shadow_createShadow(params, $slideEl, swiper.isHorizontal() ? "right" : "bottom");
+                if (shadowBefore.length) shadowBefore[0].style.opacity = Math.max(-progress, 0);
+                if (shadowAfter.length) shadowAfter[0].style.opacity = Math.max(progress, 0);
+            };
+            const recreateShadows = () => {
+                const params = swiper.params.flipEffect;
+                swiper.slides.each((slideEl => {
+                    const $slideEl = dom(slideEl);
+                    let progress = $slideEl[0].progress;
+                    if (swiper.params.flipEffect.limitRotation) progress = Math.max(Math.min(slideEl.progress, 1), -1);
+                    createSlideShadows($slideEl, progress, params);
+                }));
+            };
+            const setTranslate = () => {
+                const {slides, rtlTranslate: rtl} = swiper;
+                const params = swiper.params.flipEffect;
+                for (let i = 0; i < slides.length; i += 1) {
+                    const $slideEl = slides.eq(i);
+                    let progress = $slideEl[0].progress;
+                    if (swiper.params.flipEffect.limitRotation) progress = Math.max(Math.min($slideEl[0].progress, 1), -1);
+                    const offset = $slideEl[0].swiperSlideOffset;
+                    const rotate = -180 * progress;
+                    let rotateY = rotate;
+                    let rotateX = 0;
+                    let tx = swiper.params.cssMode ? -offset - swiper.translate : -offset;
+                    let ty = 0;
+                    if (!swiper.isHorizontal()) {
+                        ty = tx;
+                        tx = 0;
+                        rotateX = -rotateY;
+                        rotateY = 0;
+                    } else if (rtl) rotateY = -rotateY;
+                    $slideEl[0].style.zIndex = -Math.abs(Math.round(progress)) + slides.length;
+                    if (params.slideShadows) createSlideShadows($slideEl, progress, params);
+                    const transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    const $targetEl = effect_target_effectTarget(params, $slideEl);
+                    $targetEl.transform(transform);
+                }
+            };
+            const setTransition = duration => {
+                const {transformEl} = swiper.params.flipEffect;
+                const $transitionElements = transformEl ? swiper.slides.find(transformEl) : swiper.slides;
+                $transitionElements.transition(duration).find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").transition(duration);
+                effect_virtual_transition_end_effectVirtualTransitionEnd({
+                    swiper,
+                    duration,
+                    transformEl
+                });
+            };
+            effect_init_effectInit({
+                effect: "flip",
+                swiper,
+                on,
+                setTranslate,
+                setTransition,
+                recreateShadows,
+                getEffectParams: () => swiper.params.flipEffect,
+                perspective: () => true,
+                overwriteParams: () => ({
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    watchSlidesProgress: true,
+                    spaceBetween: 0,
+                    virtualTranslate: !swiper.params.cssMode
+                })
+            });
+        }
         function initSliders() {
             if (document.querySelector(".slider-main__slider")) ;
             if (document.querySelector(".main-content__slider")) ;
@@ -10257,6 +10347,10 @@
                 observeParents: true,
                 slidesPerView: "auto",
                 grabCursor: true,
+                navigation: {
+                    prevEl: ".history__arrows .slider-arrow_prev",
+                    nextEl: ".history__arrows .slider-arrow_next"
+                },
                 breakpoints: {
                     320: {
                         slidesPerView: 1.1,
@@ -10335,8 +10429,8 @@
                 swiper.slideTo(tmp1, 800);
             }));
         }));
-        let slider11 = new core(".slider-main__slider", {
-            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller ],
+        let sliderMain = new core(".slider-main__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade ],
             observer: true,
             observeParents: true,
             slidesPerView: 1,
@@ -10344,7 +10438,6 @@
             speed: 2e3,
             parallax: true,
             loop: true,
-            effect: "fade",
             pagination: {
                 el: ".slider-main__dotts",
                 clickable: true
@@ -10364,12 +10457,12 @@
             },
             on: {}
         });
-        let slider22 = new core(".main-content__slider", {
-            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade ],
+        let sliderMainContent = new core(".main-content__slider", {
+            modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade, EffectFlip ],
             observer: true,
             observeParents: true,
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 0,
             autoHeight: true,
             speed: 2e3,
             loop: true,
@@ -10390,8 +10483,8 @@
             },
             on: {}
         });
-        slider11.controller.control = slider22;
-        slider22.controller.control = slider11;
+        sliderMain.controller.control = sliderMainContent;
+        sliderMainContent.controller.control = sliderMain;
         __webpack_require__(2352);
         __webpack_require__(3542);
         var can_use_dom = __webpack_require__(1807);
