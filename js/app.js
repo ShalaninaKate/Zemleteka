@@ -10438,6 +10438,10 @@
             speed: 2e3,
             parallax: true,
             loop: true,
+            autoplay: {
+                delay: 3e3,
+                disableOnInteraction: false
+            },
             pagination: {
                 el: ".slider-main__dotts",
                 clickable: true
@@ -10447,9 +10451,7 @@
                 nextEl: ".swiper-button-next"
             },
             breakpoints: {
-                320: {
-                    autoHeight: true
-                },
+                320: {},
                 500: {},
                 768: {},
                 992: {},
@@ -10463,7 +10465,6 @@
             observeParents: true,
             slidesPerView: 1,
             spaceBetween: 0,
-            autoHeight: true,
             speed: 2e3,
             loop: true,
             effect: "fade",
@@ -10471,13 +10472,9 @@
                 crossFade: true
             },
             breakpoints: {
-                320: {
-                    autoHeight: false
-                },
+                320: {},
                 500: {},
-                768: {
-                    autoHeight: true
-                },
+                768: {},
                 992: {},
                 1400: {}
             },
