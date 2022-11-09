@@ -5088,21 +5088,16 @@
                 function showMoreActions(e) {
                     const targetEvent = e.target;
                     const targetType = e.type;
-                    if ("click" === targetType) {
-                        if (targetEvent.closest("[data-showmore-button]")) {
-                            const showMoreButton = targetEvent.closest("[data-showmore-button]");
-                            const showMoreBlock = showMoreButton.closest("[data-showmore]");
-                            const showMoreContent = showMoreBlock.querySelector("[data-showmore-content]");
-                            const showMoreSpeed = showMoreBlock.dataset.showmoreButton ? showMoreBlock.dataset.showmoreButton : "500";
-                            const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-                            if (!showMoreContent.classList.contains("_slide")) {
-                                showMoreBlock.classList.contains("_showmore-active") ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight) : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
-                                showMoreBlock.classList.toggle("_showmore-active");
-                            }
+                    if ("click" === targetType) if (targetEvent.closest("[data-showmore-button]")) {
+                        const showMoreButton = targetEvent.closest("[data-showmore-button]");
+                        const showMoreBlock = showMoreButton.closest("[data-showmore]");
+                        const showMoreContent = showMoreBlock.querySelector("[data-showmore-content]");
+                        const showMoreSpeed = showMoreBlock.dataset.showmoreButton ? showMoreBlock.dataset.showmoreButton : "500";
+                        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+                        if (!showMoreContent.classList.contains("_slide")) {
+                            showMoreBlock.classList.contains("_showmore-active") ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight) : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
+                            showMoreBlock.classList.toggle("_showmore-active");
                         }
-                    } else if ("resize" === targetType) {
-                        showMoreBlocksRegular && showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-                        mdQueriesArray && mdQueriesArray.length ? initItemsMedia(mdQueriesArray) : null;
                     }
                 }
             }));
@@ -10434,12 +10429,14 @@
             observer: true,
             observeParents: true,
             slidesPerView: 1,
+            grabCursor: true,
             spaceBetween: 0,
-            speed: 2e3,
+            autoHeight: true,
+            speed: 2500,
             parallax: true,
             loop: true,
             autoplay: {
-                delay: 3e3,
+                delay: 6e3,
                 disableOnInteraction: false
             },
             pagination: {
@@ -10451,7 +10448,9 @@
                 nextEl: ".swiper-button-next"
             },
             breakpoints: {
-                320: {},
+                320: {
+                    autoHeight: true
+                },
                 500: {},
                 768: {},
                 992: {},
@@ -10459,12 +10458,13 @@
             },
             on: {}
         });
-        let sliderMainContent = new core(".main-content__slider", {
+        let sliderMainContent = new core(".slider-more__slider", {
             modules: [ Navigation, Pagination, Autoplay, Parallax, Controller, EffectFade, EffectFlip ],
             observer: true,
             observeParents: true,
             slidesPerView: 1,
             spaceBetween: 0,
+            autoHeight: true,
             speed: 2e3,
             loop: true,
             effect: "fade",
@@ -10472,16 +10472,19 @@
                 crossFade: true
             },
             breakpoints: {
-                320: {},
+                320: {
+                    autoHeight: false
+                },
                 500: {},
-                768: {},
+                768: {
+                    autoHeight: true
+                },
                 992: {},
                 1400: {}
             },
             on: {}
         });
         sliderMain.controller.control = sliderMainContent;
-        sliderMainContent.controller.control = sliderMain;
         __webpack_require__(2352);
         __webpack_require__(3542);
         var can_use_dom = __webpack_require__(1807);
