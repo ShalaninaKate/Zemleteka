@@ -4046,6 +4046,7 @@ body::after {
 
 .slider-main__slide {
   position: relative;
+  min-width: 100%;
 }
 
 .slider-main__image {
