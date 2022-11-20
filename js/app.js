@@ -1,4 +1,6 @@
+
 (() => {
+	"use strict";
     var __webpack_modules__ = {
         1807: module => {
             var canUseDOM = !!("undefined" !== typeof window && window.document && window.document.createElement);
@@ -5276,7 +5278,7 @@
                     classes: {
                         popup: "popup",
                         popupWrapper: "popup__wrapper",
-                        popupWrapperInner: "townships-filter__wrapper",
+                        popupWrapperInner: "popup__wrapper-inner",
                         popupContent: "popup__content",
                         popupActive: "popup_show",
                         bodyActive: "popup-show"
@@ -5588,10 +5590,9 @@
         const rangeSlider = document.getElementById("range-slider-price");
         var min_price = 5e5;
         var max_price = 15e5;
-        if ("undefined" !== typeof Number(rangeSlider.dataset.min) && null !== Number(rangeSlider.dataset.min) && !isNaN(Number(rangeSlider.dataset.min))) min_price = Number(rangeSlider.dataset.min);
-        if ("undefined" !== typeof Number(rangeSlider.dataset.max) && null !== Number(rangeSlider.dataset.max) && !isNaN(Number(rangeSlider.dataset.max))) max_price = Number(rangeSlider.dataset.max);
-        console.log(min_price, max_price);
         if (rangeSlider) {
+            if ("undefined" !== typeof Number(rangeSlider.dataset.min) && null !== Number(rangeSlider.dataset.min) && !isNaN(Number(rangeSlider.dataset.min))) min_price = Number(rangeSlider.dataset.min);
+            if ("undefined" !== typeof Number(rangeSlider.dataset.max) && null !== Number(rangeSlider.dataset.max) && !isNaN(Number(rangeSlider.dataset.max))) max_price = Number(rangeSlider.dataset.max);
             nouislider.create(rangeSlider, {
                 start: [ min_price, max_price ],
                 connect: true,
@@ -5627,9 +5628,9 @@
         const rangeSliderSquare = document.getElementById("range-slider-square");
         var min_price1 = 5.06;
         var max_price1 = 20.04;
-        if ("undefined" !== typeof Number(rangeSliderSquare.dataset.min) && null !== Number(rangeSliderSquare.dataset.min) && !isNaN(Number(rangeSliderSquare.dataset.min))) min_price1 = Number(rangeSliderSquare.dataset.min);
-        if ("undefined" !== typeof Number(rangeSliderSquare.dataset.max) && null !== Number(rangeSliderSquare.dataset.max) && !isNaN(Number(rangeSliderSquare.dataset.max))) max_price1 = Number(rangeSliderSquare.dataset.max);
         if (rangeSliderSquare) {
+            if ("undefined" !== typeof Number(rangeSliderSquare.dataset.min) && null !== Number(rangeSliderSquare.dataset.min) && !isNaN(Number(rangeSliderSquare.dataset.min))) min_price1 = Number(rangeSliderSquare.dataset.min);
+            if ("undefined" !== typeof Number(rangeSliderSquare.dataset.max) && null !== Number(rangeSliderSquare.dataset.max) && !isNaN(Number(rangeSliderSquare.dataset.max))) max_price1 = Number(rangeSliderSquare.dataset.max);
             nouislider.create(rangeSliderSquare, {
                 start: [ min_price1, max_price1 ],
                 connect: true,
@@ -10435,10 +10436,6 @@
             speed: 2500,
             parallax: true,
             loop: true,
-            autoplay: {
-                delay: 6e3,
-                disableOnInteraction: false
-            },
             pagination: {
                 el: ".slider-main__dotts",
                 clickable: true
